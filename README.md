@@ -1,4 +1,4 @@
-PostHog Typescript SDK
+# PostHog Typescript SDK
 
 <div align="left">
    <p>The PostHog API allows you to perform any action as if you were an authenticated user utilizing the PostHog UI. It is mostly used for getting data out of PostHog, as well as other private actions such as creating a feature flag.</p>
