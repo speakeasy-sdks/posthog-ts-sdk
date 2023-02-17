@@ -28,7 +28,7 @@ export class ActionInput extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=steps, form, name=steps;json=true, multipart_form, name=steps;json=true", elemType: ActionStep })
   steps?: ActionStep[];
 
-  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;json=true, multipart_form, name=tags;json=true" })
+  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;, multipart_form, name=tags" })
   tags?: any[];
 }
 

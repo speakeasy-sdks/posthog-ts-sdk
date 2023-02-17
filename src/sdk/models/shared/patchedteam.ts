@@ -449,7 +449,7 @@ export class PatchedTeamInput extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=anonymize_ips, form, name=anonymize_ips;, multipart_form, name=anonymize_ips" })
   anonymizeIps?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=app_urls, form, name=app_urls;json=true, multipart_form, name=app_urls;json=true" })
+  @SpeakeasyMetadata({ data: "json, name=app_urls, form, name=app_urls;, multipart_form, name=app_urls" })
   appUrls?: string[];
 
   @SpeakeasyMetadata({ data: "json, name=capture_console_log_opt_in, form, name=capture_console_log_opt_in;, multipart_form, name=capture_console_log_opt_in" })
@@ -473,7 +473,7 @@ export class PatchedTeamInput extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=is_demo, form, name=is_demo;, multipart_form, name=is_demo" })
   isDemo?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=live_events_columns, form, name=live_events_columns;json=true, multipart_form, name=live_events_columns;json=true" })
+  @SpeakeasyMetadata({ data: "json, name=live_events_columns, form, name=live_events_columns;, multipart_form, name=live_events_columns" })
   liveEventsColumns?: string[];
 
   @SpeakeasyMetadata({ data: "json, name=name, form, name=name;, multipart_form, name=name" })
@@ -482,13 +482,13 @@ export class PatchedTeamInput extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=path_cleaning_filters, form, name=path_cleaning_filters;json=true, multipart_form, name=path_cleaning_filters;json=true" })
   pathCleaningFilters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=person_display_name_properties, form, name=person_display_name_properties;json=true, multipart_form, name=person_display_name_properties;json=true" })
+  @SpeakeasyMetadata({ data: "json, name=person_display_name_properties, form, name=person_display_name_properties;, multipart_form, name=person_display_name_properties" })
   personDisplayNameProperties?: string[];
 
   @SpeakeasyMetadata({ data: "json, name=primary_dashboard, form, name=primary_dashboard;, multipart_form, name=primary_dashboard" })
   primaryDashboard?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=recording_domains, form, name=recording_domains;json=true, multipart_form, name=recording_domains;json=true" })
+  @SpeakeasyMetadata({ data: "json, name=recording_domains, form, name=recording_domains;, multipart_form, name=recording_domains" })
   recordingDomains?: string[];
 
   @SpeakeasyMetadata({ data: "json, name=session_recording_opt_in, form, name=session_recording_opt_in;, multipart_form, name=session_recording_opt_in" })
