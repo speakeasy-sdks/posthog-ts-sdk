@@ -40,9 +40,13 @@ There you go! At the top of the list you should now be seeing your brand new key
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
 ```typescript
-import { Posthog, withSecurity} from "@posthog/sdk";
-import { ActionsCountRetrieveRequest, ActionsCountRetrieveResponse } from "@posthog/sdk/src/sdk/models/operations";
+import {
+  ActionsCountRetrieveRequest,
+  ActionsCountRetrieveResponse 
+} from "@posthog/sdk/dist/sdk/models/operations";
+
 import { AxiosError } from "axios";
+import { Posthog } from "@posthog/sdk";
 
 
 const sdk = new Posthog();
