@@ -29,7 +29,7 @@ export class PatchedSubscriptionInput extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=bysetpos, form, name=bysetpos;, multipart_form, name=bysetpos" })
   bysetpos?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=byweekday, form, name=byweekday;json=true, multipart_form, name=byweekday;json=true" })
+  @SpeakeasyMetadata({ data: "json, name=byweekday, form, name=byweekday;, multipart_form, name=byweekday" })
   byweekday?: PatchedSubscriptionByweekdayEnum[];
 
   @SpeakeasyMetadata({ data: "json, name=count, form, name=count;, multipart_form, name=count" })

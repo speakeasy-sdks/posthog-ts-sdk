@@ -27,7 +27,7 @@ export class PatchedDashboardInput extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=restriction_level, form, name=restriction_level;, multipart_form, name=restriction_level" })
   restrictionLevel?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;json=true, multipart_form, name=tags;json=true" })
+  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;, multipart_form, name=tags" })
   tags?: any[];
 
   @SpeakeasyMetadata({ data: "json, name=use_dashboard, form, name=use_dashboard;, multipart_form, name=use_dashboard" })

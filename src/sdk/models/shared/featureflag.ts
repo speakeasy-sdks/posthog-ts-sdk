@@ -33,7 +33,7 @@ export class FeatureFlagInput extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=rollback_conditions, form, name=rollback_conditions;json=true, multipart_form, name=rollback_conditions;json=true" })
   rollbackConditions?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;json=true, multipart_form, name=tags;json=true" })
+  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;, multipart_form, name=tags" })
   tags?: any[];
 }
 

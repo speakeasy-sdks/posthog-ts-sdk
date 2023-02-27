@@ -1,8 +1,12 @@
 <!-- Start SDK Example Usage -->
 ```typescript
-import { Posthog, withSecurity} from "@posthog/sdk";
-import { ActionsCountRetrieveRequest, ActionsCountRetrieveResponse } from "@posthog/sdk/src/sdk/models/operations";
+import {
+  ActionsCountRetrieveRequest,
+  ActionsCountRetrieveResponse 
+} from "@posthog/sdk/dist/sdk/models/operations";
+
 import { AxiosError } from "axios";
+import { Posthog } from "@posthog/sdk";
 
 
 const sdk = new Posthog();

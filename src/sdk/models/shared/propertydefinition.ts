@@ -26,7 +26,7 @@ export class PropertyDefinitionInput extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=query_usage_30_day, form, name=query_usage_30_day;, multipart_form, name=query_usage_30_day" })
   queryUsage30Day?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;json=true, multipart_form, name=tags;json=true" })
+  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;, multipart_form, name=tags" })
   tags?: any[];
 }
 
