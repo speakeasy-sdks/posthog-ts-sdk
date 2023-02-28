@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 export enum TeamTimezoneEnum {
     AfricaAbidjan = "Africa/Abidjan",
@@ -443,164 +444,219 @@ export enum TeamTimezoneEnum {
 }
 
 export class Team extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=access_control" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "access_control" })
   accessControl?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=anonymize_ips" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "anonymize_ips" })
   anonymizeIps?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=api_token" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_token" })
   apiToken: string;
 
-  @SpeakeasyMetadata({ data: "json, name=app_urls" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "app_urls" })
   appUrls?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=capture_console_log_opt_in" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "capture_console_log_opt_in" })
   captureConsoleLogOptIn?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=capture_performance_opt_in" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "capture_performance_opt_in" })
   capturePerformanceOptIn?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=completed_snippet_onboarding" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "completed_snippet_onboarding" })
   completedSnippetOnboarding?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=correlation_config" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "correlation_config" })
   correlationConfig?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=data_attributes" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "data_attributes" })
   dataAttributes?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=effective_membership_level" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "effective_membership_level" })
   effectiveMembershipLevel: number;
 
-  @SpeakeasyMetadata({ data: "json, name=groups_on_events_querying_enabled" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "groups_on_events_querying_enabled" })
   groupsOnEventsQueryingEnabled: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=has_group_types" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "has_group_types" })
   hasGroupTypes: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=ingested_event" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "ingested_event" })
   ingestedEvent: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=inject_web_apps" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "inject_web_apps" })
   injectWebApps?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=is_demo" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_demo" })
   isDemo?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=live_events_columns" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "live_events_columns" })
   liveEventsColumns?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=organization" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "organization" })
   organization: string;
 
-  @SpeakeasyMetadata({ data: "json, name=path_cleaning_filters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "path_cleaning_filters" })
   pathCleaningFilters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=person_display_name_properties" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "person_display_name_properties" })
   personDisplayNameProperties?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=person_on_events_querying_enabled" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "person_on_events_querying_enabled" })
   personOnEventsQueryingEnabled: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=primary_dashboard" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "primary_dashboard" })
   primaryDashboard?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=recording_domains" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "recording_domains" })
   recordingDomains?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=session_recording_opt_in" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "session_recording_opt_in" })
   sessionRecordingOptIn?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=slack_incoming_webhook" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "slack_incoming_webhook" })
   slackIncomingWebhook?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=test_account_filters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "test_account_filters" })
   testAccountFilters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=test_account_filters_default_checked" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "test_account_filters_default_checked" })
   testAccountFiltersDefaultChecked?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "timezone" })
   timezone?: TeamTimezoneEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "updated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   updatedAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
 export class TeamInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=access_control, form, name=access_control;, multipart_form, name=access_control" })
+  @SpeakeasyMetadata({ data: "form, name=access_control, multipart_form, name=access_control" })
+  @Expose({ name: "access_control" })
   accessControl?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=anonymize_ips, form, name=anonymize_ips;, multipart_form, name=anonymize_ips" })
+  @SpeakeasyMetadata({ data: "form, name=anonymize_ips, multipart_form, name=anonymize_ips" })
+  @Expose({ name: "anonymize_ips" })
   anonymizeIps?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=app_urls, form, name=app_urls;, multipart_form, name=app_urls" })
+  @SpeakeasyMetadata({ data: "form, name=app_urls, multipart_form, name=app_urls" })
+  @Expose({ name: "app_urls" })
   appUrls?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=capture_console_log_opt_in, form, name=capture_console_log_opt_in;, multipart_form, name=capture_console_log_opt_in" })
+  @SpeakeasyMetadata({ data: "form, name=capture_console_log_opt_in, multipart_form, name=capture_console_log_opt_in" })
+  @Expose({ name: "capture_console_log_opt_in" })
   captureConsoleLogOptIn?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=capture_performance_opt_in, form, name=capture_performance_opt_in;, multipart_form, name=capture_performance_opt_in" })
+  @SpeakeasyMetadata({ data: "form, name=capture_performance_opt_in, multipart_form, name=capture_performance_opt_in" })
+  @Expose({ name: "capture_performance_opt_in" })
   capturePerformanceOptIn?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=completed_snippet_onboarding, form, name=completed_snippet_onboarding;, multipart_form, name=completed_snippet_onboarding" })
+  @SpeakeasyMetadata({ data: "form, name=completed_snippet_onboarding, multipart_form, name=completed_snippet_onboarding" })
+  @Expose({ name: "completed_snippet_onboarding" })
   completedSnippetOnboarding?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=correlation_config, form, name=correlation_config;json=true, multipart_form, name=correlation_config;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=correlation_config;json=true, multipart_form, name=correlation_config;json=true" })
+  @Expose({ name: "correlation_config" })
   correlationConfig?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=data_attributes, form, name=data_attributes;json=true, multipart_form, name=data_attributes;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=data_attributes;json=true, multipart_form, name=data_attributes;json=true" })
+  @Expose({ name: "data_attributes" })
   dataAttributes?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=inject_web_apps, form, name=inject_web_apps;, multipart_form, name=inject_web_apps" })
+  @SpeakeasyMetadata({ data: "form, name=inject_web_apps, multipart_form, name=inject_web_apps" })
+  @Expose({ name: "inject_web_apps" })
   injectWebApps?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=is_demo, form, name=is_demo;, multipart_form, name=is_demo" })
+  @SpeakeasyMetadata({ data: "form, name=is_demo, multipart_form, name=is_demo" })
+  @Expose({ name: "is_demo" })
   isDemo?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=live_events_columns, form, name=live_events_columns;, multipart_form, name=live_events_columns" })
+  @SpeakeasyMetadata({ data: "form, name=live_events_columns, multipart_form, name=live_events_columns" })
+  @Expose({ name: "live_events_columns" })
   liveEventsColumns?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;, multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "form, name=name, multipart_form, name=name" })
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=path_cleaning_filters, form, name=path_cleaning_filters;json=true, multipart_form, name=path_cleaning_filters;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=path_cleaning_filters;json=true, multipart_form, name=path_cleaning_filters;json=true" })
+  @Expose({ name: "path_cleaning_filters" })
   pathCleaningFilters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=person_display_name_properties, form, name=person_display_name_properties;, multipart_form, name=person_display_name_properties" })
+  @SpeakeasyMetadata({ data: "form, name=person_display_name_properties, multipart_form, name=person_display_name_properties" })
+  @Expose({ name: "person_display_name_properties" })
   personDisplayNameProperties?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=primary_dashboard, form, name=primary_dashboard;, multipart_form, name=primary_dashboard" })
+  @SpeakeasyMetadata({ data: "form, name=primary_dashboard, multipart_form, name=primary_dashboard" })
+  @Expose({ name: "primary_dashboard" })
   primaryDashboard?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=recording_domains, form, name=recording_domains;, multipart_form, name=recording_domains" })
+  @SpeakeasyMetadata({ data: "form, name=recording_domains, multipart_form, name=recording_domains" })
+  @Expose({ name: "recording_domains" })
   recordingDomains?: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=session_recording_opt_in, form, name=session_recording_opt_in;, multipart_form, name=session_recording_opt_in" })
+  @SpeakeasyMetadata({ data: "form, name=session_recording_opt_in, multipart_form, name=session_recording_opt_in" })
+  @Expose({ name: "session_recording_opt_in" })
   sessionRecordingOptIn?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=slack_incoming_webhook, form, name=slack_incoming_webhook;, multipart_form, name=slack_incoming_webhook" })
+  @SpeakeasyMetadata({ data: "form, name=slack_incoming_webhook, multipart_form, name=slack_incoming_webhook" })
+  @Expose({ name: "slack_incoming_webhook" })
   slackIncomingWebhook?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=test_account_filters, form, name=test_account_filters;json=true, multipart_form, name=test_account_filters;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=test_account_filters;json=true, multipart_form, name=test_account_filters;json=true" })
+  @Expose({ name: "test_account_filters" })
   testAccountFilters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=test_account_filters_default_checked, form, name=test_account_filters_default_checked;, multipart_form, name=test_account_filters_default_checked" })
+  @SpeakeasyMetadata({ data: "form, name=test_account_filters_default_checked, multipart_form, name=test_account_filters_default_checked" })
+  @Expose({ name: "test_account_filters_default_checked" })
   testAccountFiltersDefaultChecked?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=timezone, form, name=timezone;, multipart_form, name=timezone" })
+  @SpeakeasyMetadata({ data: "form, name=timezone, multipart_form, name=timezone" })
+  @Expose({ name: "timezone" })
   timezone?: TeamTimezoneEnum;
 }

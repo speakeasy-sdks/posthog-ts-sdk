@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform, Type } from "class-transformer";
 
 
 // EventDefinitionInput
@@ -6,42 +7,56 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * Serializer mixin that resolves appropriate response for tags depending on license.
 **/
 export class EventDefinitionInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=created_at, form, name=created_at;, multipart_form, name=created_at" })
+  @SpeakeasyMetadata({ data: "form, name=created_at;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=created_at;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=last_seen_at, form, name=last_seen_at;, multipart_form, name=last_seen_at" })
+  @SpeakeasyMetadata({ data: "form, name=last_seen_at;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=last_seen_at;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "last_seen_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastSeenAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;, multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "form, name=name, multipart_form, name=name" })
+  @Expose({ name: "name" })
   name: string;
 
-  @SpeakeasyMetadata({ data: "json, name=post_to_slack, form, name=post_to_slack;, multipart_form, name=post_to_slack" })
+  @SpeakeasyMetadata({ data: "form, name=post_to_slack, multipart_form, name=post_to_slack" })
+  @Expose({ name: "post_to_slack" })
   postToSlack?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=query_usage_30_day, form, name=query_usage_30_day;, multipart_form, name=query_usage_30_day" })
+  @SpeakeasyMetadata({ data: "form, name=query_usage_30_day, multipart_form, name=query_usage_30_day" })
+  @Expose({ name: "query_usage_30_day" })
   queryUsage30Day?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;, multipart_form, name=tags" })
+  @SpeakeasyMetadata({ data: "form, name=tags, multipart_form, name=tags" })
+  @Expose({ name: "tags" })
   tags?: any[];
 
-  @SpeakeasyMetadata({ data: "json, name=volume_30_day, form, name=volume_30_day;, multipart_form, name=volume_30_day" })
+  @SpeakeasyMetadata({ data: "form, name=volume_30_day, multipart_form, name=volume_30_day" })
+  @Expose({ name: "volume_30_day" })
   volume30Day?: number;
 }
 
 export class EventDefinitionCreatedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
@@ -50,45 +65,64 @@ export class EventDefinitionCreatedBy extends SpeakeasyBase {
  * Serializer mixin that resolves appropriate response for tags depending on license.
 **/
 export class EventDefinition extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=action_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "action_id" })
   actionId: number;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
+  @Type(() => EventDefinitionCreatedBy)
   createdBy: EventDefinitionCreatedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: string;
 
-  @SpeakeasyMetadata({ data: "json, name=is_action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_action" })
   isAction: string;
 
-  @SpeakeasyMetadata({ data: "json, name=is_calculating" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_calculating" })
   isCalculating: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=last_calculated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_calculated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastCalculatedAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=last_seen_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_seen_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastSeenAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=last_updated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_updated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastUpdatedAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name: string;
 
-  @SpeakeasyMetadata({ data: "json, name=post_to_slack" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "post_to_slack" })
   postToSlack?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=query_usage_30_day" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "query_usage_30_day" })
   queryUsage30Day?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "tags" })
   tags?: any[];
 
-  @SpeakeasyMetadata({ data: "json, name=volume_30_day" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "volume_30_day" })
   volume30Day?: number;
 }

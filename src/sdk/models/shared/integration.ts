@@ -1,20 +1,26 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform, Type } from "class-transformer";
 
 
 export class IntegrationCreatedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 export enum IntegrationKindEnum {
@@ -26,22 +32,30 @@ export enum IntegrationKindEnum {
  * Standard Integration serializer.
 **/
 export class Integration extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=config" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "config" })
   config?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
+  @Type(() => IntegrationCreatedBy)
   createdBy: IntegrationCreatedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "errors" })
   errors: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "kind" })
   kind: IntegrationKindEnum;
 }
 
@@ -50,9 +64,11 @@ export class Integration extends SpeakeasyBase {
  * Standard Integration serializer.
 **/
 export class IntegrationInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=config, form, name=config;json=true, multipart_form, name=config;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=config;json=true, multipart_form, name=config;json=true" })
+  @Expose({ name: "config" })
   config?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=kind, form, name=kind;, multipart_form, name=kind" })
+  @SpeakeasyMetadata({ data: "form, name=kind, multipart_form, name=kind" })
+  @Expose({ name: "kind" })
   kind: IntegrationKindEnum;
 }

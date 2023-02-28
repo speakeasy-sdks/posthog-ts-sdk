@@ -3,6 +3,7 @@ import { FilterAction } from "./filteraction";
 import { FilterEvent } from "./filterevent";
 import { FunnelExclusion } from "./funnelexclusion";
 import { Property } from "./property";
+import { Expose, Type } from "class-transformer";
 
 export enum FunnelBreakdownTypeEnum {
     Event = "event",
@@ -31,51 +32,71 @@ export enum FunnelFunnelWindowIntervalTypeEnum {
 }
 
 export class Funnel extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=actions", elemType: FilterAction })
+  @SpeakeasyMetadata({ elemType: FilterAction })
+  @Expose({ name: "actions" })
+  @Type(() => FilterAction)
   actions?: FilterAction[];
 
-  @SpeakeasyMetadata({ data: "json, name=aggregation_group_type_index" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "aggregation_group_type_index" })
   aggregationGroupTypeIndex?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=breakdown" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "breakdown" })
   breakdown?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=breakdown_limit" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "breakdown_limit" })
   breakdownLimit?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=breakdown_type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "breakdown_type" })
   breakdownType?: FunnelBreakdownTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=date_from" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "date_from" })
   dateFrom?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=date_to" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "date_to" })
   dateTo?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=events", elemType: FilterEvent })
+  @SpeakeasyMetadata({ elemType: FilterEvent })
+  @Expose({ name: "events" })
+  @Type(() => FilterEvent)
   events?: FilterEvent[];
 
-  @SpeakeasyMetadata({ data: "json, name=exclusions", elemType: FunnelExclusion })
+  @SpeakeasyMetadata({ elemType: FunnelExclusion })
+  @Expose({ name: "exclusions" })
+  @Type(() => FunnelExclusion)
   exclusions?: FunnelExclusion[];
 
-  @SpeakeasyMetadata({ data: "json, name=filter_test_accounts" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filter_test_accounts" })
   filterTestAccounts?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=funnel_order_type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "funnel_order_type" })
   funnelOrderType?: FunnelFunnelOrderTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=funnel_viz_type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "funnel_viz_type" })
   funnelVizType?: FunnelFunnelVizTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=funnel_window_days" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "funnel_window_days" })
   funnelWindowDays?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=funnel_window_interval" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "funnel_window_interval" })
   funnelWindowInterval?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=funnel_window_interval_type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "funnel_window_interval_type" })
   funnelWindowIntervalType?: FunnelFunnelWindowIntervalTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "properties" })
+  @Type(() => Property)
   properties?: Property;
 }

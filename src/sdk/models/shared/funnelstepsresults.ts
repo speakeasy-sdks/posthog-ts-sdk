@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { FunnelStepsResult } from "./funnelstepsresult";
+import { Expose, Transform, Type } from "class-transformer";
 
 export enum FunnelStepsResultsTimezoneEnum {
     AfricaAbidjan = "Africa/Abidjan",
@@ -444,15 +445,21 @@ export enum FunnelStepsResultsTimezoneEnum {
 }
 
 export class FunnelStepsResults extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=is_cached" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_cached" })
   isCached: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=last_refresh" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_refresh" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastRefresh: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=result", elemType: FunnelStepsResult })
+  @SpeakeasyMetadata({ elemType: FunnelStepsResult })
+  @Expose({ name: "result" })
+  @Type(() => FunnelStepsResult)
   result: FunnelStepsResult[];
 
-  @SpeakeasyMetadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "timezone" })
   timezone?: FunnelStepsResultsTimezoneEnum;
 }

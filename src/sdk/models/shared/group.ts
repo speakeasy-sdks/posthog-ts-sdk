@@ -1,16 +1,22 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 export class Group extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=group_key" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "group_key" })
   groupKey: string;
 
-  @SpeakeasyMetadata({ data: "json, name=group_properties" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "group_properties" })
   groupProperties?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=group_type_index" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "group_type_index" })
   groupTypeIndex: number;
 }

@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
+import * as shared from "./models/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class ResetToken {
   _defaultClient: AxiosInstance;
@@ -44,6 +46,7 @@ export class ResetToken {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -62,7 +65,11 @@ export class ResetToken {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.team = httpRes?.data;
+              res.team = plainToInstance(
+                shared.Team,
+                httpRes?.data as shared.Team,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

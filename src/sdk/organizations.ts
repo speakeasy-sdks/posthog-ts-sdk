@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Organizations {
   _defaultClient: AxiosInstance;
@@ -41,6 +43,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -60,7 +63,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationDomain = httpRes?.data;
+              res.organizationDomain = plainToInstance(
+                shared.OrganizationDomain,
+                httpRes?.data as shared.OrganizationDomain,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -82,6 +89,7 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/domains/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -116,19 +124,13 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/domains/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -139,7 +141,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedOrganizationDomainList = httpRes?.data;
+              res.paginatedOrganizationDomainList = plainToInstance(
+                shared.PaginatedOrganizationDomainList,
+                httpRes?.data as shared.PaginatedOrganizationDomainList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -171,6 +177,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -189,7 +196,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationDomain = httpRes?.data;
+              res.organizationDomain = plainToInstance(
+                shared.OrganizationDomain,
+                httpRes?.data as shared.OrganizationDomain,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -212,6 +223,7 @@ export class Organizations {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -226,7 +238,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationDomain = httpRes?.data;
+              res.organizationDomain = plainToInstance(
+                shared.OrganizationDomain,
+                httpRes?.data as shared.OrganizationDomain,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -258,6 +274,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -277,7 +294,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationDomain = httpRes?.data;
+              res.organizationDomain = plainToInstance(
+                shared.OrganizationDomain,
+                httpRes?.data as shared.OrganizationDomain,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -309,6 +330,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -328,7 +350,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationDomain = httpRes?.data;
+              res.organizationDomain = plainToInstance(
+                shared.OrganizationDomain,
+                httpRes?.data as shared.OrganizationDomain,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -360,6 +386,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -379,7 +406,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationInvite = httpRes?.data;
+              res.organizationInvite = plainToInstance(
+                shared.OrganizationInvite,
+                httpRes?.data as shared.OrganizationInvite,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -411,6 +442,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -430,7 +462,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationInvite = httpRes?.data;
+              res.organizationInvite = plainToInstance(
+                shared.OrganizationInvite,
+                httpRes?.data as shared.OrganizationInvite,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -452,6 +488,7 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/invites/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -486,19 +523,13 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/invites/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -509,7 +540,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedOrganizationInviteList = httpRes?.data;
+              res.paginatedOrganizationInviteList = plainToInstance(
+                shared.PaginatedOrganizationInviteList,
+                httpRes?.data as shared.PaginatedOrganizationInviteList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -531,6 +566,7 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/members/{user__uuid}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -565,19 +601,13 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/members/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -588,7 +618,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedOrganizationMemberList = httpRes?.data;
+              res.paginatedOrganizationMemberList = plainToInstance(
+                shared.PaginatedOrganizationMemberList,
+                httpRes?.data as shared.PaginatedOrganizationMemberList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -620,6 +654,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -638,7 +673,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationMember = httpRes?.data;
+              res.organizationMember = plainToInstance(
+                shared.OrganizationMember,
+                httpRes?.data as shared.OrganizationMember,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -670,6 +709,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -688,7 +728,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationMember = httpRes?.data;
+              res.organizationMember = plainToInstance(
+                shared.OrganizationMember,
+                httpRes?.data as shared.OrganizationMember,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -711,6 +755,7 @@ export class Organizations {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -725,7 +770,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -748,6 +797,7 @@ export class Organizations {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -762,7 +812,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -794,6 +848,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -812,7 +867,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -834,6 +893,7 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/plugins/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -868,19 +928,13 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/plugins/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -891,7 +945,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedPluginList = httpRes?.data;
+              res.paginatedPluginList = plainToInstance(
+                shared.PaginatedPluginList,
+                httpRes?.data as shared.PaginatedPluginList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -923,6 +981,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -941,7 +1000,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -964,6 +1027,7 @@ export class Organizations {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -978,7 +1042,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1001,6 +1069,7 @@ export class Organizations {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -1015,7 +1084,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1038,6 +1111,7 @@ export class Organizations {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -1052,7 +1126,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1084,6 +1162,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1102,7 +1181,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1134,6 +1217,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1152,7 +1236,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1184,6 +1272,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1202,7 +1291,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1234,6 +1327,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -1253,7 +1347,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationResourceAccess = httpRes?.data;
+              res.organizationResourceAccess = plainToInstance(
+                shared.OrganizationResourceAccess,
+                httpRes?.data as shared.OrganizationResourceAccess,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1275,6 +1373,7 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/resource_access/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -1309,19 +1408,13 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/resource_access/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -1332,7 +1425,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedOrganizationResourceAccessList = httpRes?.data;
+              res.paginatedOrganizationResourceAccessList = plainToInstance(
+                shared.PaginatedOrganizationResourceAccessList,
+                httpRes?.data as shared.PaginatedOrganizationResourceAccessList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1364,6 +1461,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1382,7 +1480,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationResourceAccess = httpRes?.data;
+              res.organizationResourceAccess = plainToInstance(
+                shared.OrganizationResourceAccess,
+                httpRes?.data as shared.OrganizationResourceAccess,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1405,6 +1507,7 @@ export class Organizations {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -1419,7 +1522,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationResourceAccess = httpRes?.data;
+              res.organizationResourceAccess = plainToInstance(
+                shared.OrganizationResourceAccess,
+                httpRes?.data as shared.OrganizationResourceAccess,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1451,6 +1558,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -1470,7 +1578,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.organizationResourceAccess = httpRes?.data;
+              res.organizationResourceAccess = plainToInstance(
+                shared.OrganizationResourceAccess,
+                httpRes?.data as shared.OrganizationResourceAccess,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1502,6 +1614,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -1521,7 +1634,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.role = httpRes?.data;
+              res.role = plainToInstance(
+                shared.Role,
+                httpRes?.data as shared.Role,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1543,6 +1660,7 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/roles/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -1577,19 +1695,13 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/roles/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -1600,7 +1712,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedRoleList = httpRes?.data;
+              res.paginatedRoleList = plainToInstance(
+                shared.PaginatedRoleList,
+                httpRes?.data as shared.PaginatedRoleList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1632,6 +1748,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -1650,7 +1767,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.role = httpRes?.data;
+              res.role = plainToInstance(
+                shared.Role,
+                httpRes?.data as shared.Role,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1673,6 +1794,7 @@ export class Organizations {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -1687,7 +1809,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.role = httpRes?.data;
+              res.role = plainToInstance(
+                shared.Role,
+                httpRes?.data as shared.Role,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1719,6 +1845,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -1738,7 +1865,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.roleMembership = httpRes?.data;
+              res.roleMembership = plainToInstance(
+                shared.RoleMembershipOutput,
+                httpRes?.data as shared.RoleMembershipOutput,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1760,6 +1891,7 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -1794,19 +1926,13 @@ export class Organizations {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/roles/{parent_lookup_role_id}/role_memberships/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -1817,7 +1943,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedRoleMembershipList = httpRes?.data;
+              res.paginatedRoleMembershipList = plainToInstance(
+                shared.PaginatedRoleMembershipList,
+                httpRes?.data as shared.PaginatedRoleMembershipList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -1849,6 +1979,7 @@ export class Organizations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -1868,7 +1999,11 @@ export class Organizations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.role = httpRes?.data;
+              res.role = plainToInstance(
+                shared.Role,
+                httpRes?.data as shared.Role,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

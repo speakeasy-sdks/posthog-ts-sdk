@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 export enum TeamBasicTimezoneEnum {
     AfricaAbidjan = "Africa/Abidjan",
@@ -448,33 +449,43 @@ export enum TeamBasicTimezoneEnum {
  * Also used for nested serializers.
 **/
 export class TeamBasic extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=access_control" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "access_control" })
   accessControl?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=api_token" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_token" })
   apiToken?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=completed_snippet_onboarding" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "completed_snippet_onboarding" })
   completedSnippetOnboarding?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=ingested_event" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "ingested_event" })
   ingestedEvent?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=is_demo" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_demo" })
   isDemo?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=organization" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "organization" })
   organization: string;
 
-  @SpeakeasyMetadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "timezone" })
   timezone?: TeamBasicTimezoneEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }

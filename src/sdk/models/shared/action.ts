@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ActionStep } from "./actionstep";
+import { Expose, Transform, Type } from "class-transformer";
 
 
 // ActionInput
@@ -7,45 +8,60 @@ import { ActionStep } from "./actionstep";
  * Serializer mixin that resolves appropriate response for tags depending on license.
 **/
 export class ActionInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=deleted, form, name=deleted;, multipart_form, name=deleted" })
+  @SpeakeasyMetadata({ data: "form, name=deleted, multipart_form, name=deleted" })
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=description, form, name=description;, multipart_form, name=description" })
+  @SpeakeasyMetadata({ data: "form, name=description, multipart_form, name=description" })
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=last_calculated_at, form, name=last_calculated_at;, multipart_form, name=last_calculated_at" })
+  @SpeakeasyMetadata({ data: "form, name=last_calculated_at;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=last_calculated_at;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "last_calculated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastCalculatedAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;, multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "form, name=name, multipart_form, name=name" })
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=post_to_slack, form, name=post_to_slack;, multipart_form, name=post_to_slack" })
+  @SpeakeasyMetadata({ data: "form, name=post_to_slack, multipart_form, name=post_to_slack" })
+  @Expose({ name: "post_to_slack" })
   postToSlack?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=slack_message_format, form, name=slack_message_format;, multipart_form, name=slack_message_format" })
+  @SpeakeasyMetadata({ data: "form, name=slack_message_format, multipart_form, name=slack_message_format" })
+  @Expose({ name: "slack_message_format" })
   slackMessageFormat?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=steps, form, name=steps;json=true, multipart_form, name=steps;json=true", elemType: ActionStep })
+  @SpeakeasyMetadata({ data: "form, name=steps;json=true, multipart_form, name=steps;json=true", elemType: ActionStep })
+  @Expose({ name: "steps" })
+  @Type(() => ActionStep)
   steps?: ActionStep[];
 
-  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;, multipart_form, name=tags" })
+  @SpeakeasyMetadata({ data: "form, name=tags, multipart_form, name=tags" })
+  @Expose({ name: "tags" })
   tags?: any[];
 }
 
 export class ActionCreatedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
@@ -54,45 +70,63 @@ export class ActionCreatedBy extends SpeakeasyBase {
  * Serializer mixin that resolves appropriate response for tags depending on license.
 **/
 export class Action extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
+  @Type(() => ActionCreatedBy)
   createdBy: ActionCreatedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=is_action" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_action" })
   isAction: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=is_calculating" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_calculating" })
   isCalculating: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=last_calculated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_calculated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastCalculatedAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=post_to_slack" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "post_to_slack" })
   postToSlack?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=slack_message_format" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "slack_message_format" })
   slackMessageFormat?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=steps", elemType: ActionStep })
+  @SpeakeasyMetadata({ elemType: ActionStep })
+  @Expose({ name: "steps" })
+  @Type(() => ActionStep)
   steps?: ActionStep[];
 
-  @SpeakeasyMetadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "tags" })
   tags?: any[];
 
-  @SpeakeasyMetadata({ data: "json, name=team_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "team_id" })
   teamId: number;
 }

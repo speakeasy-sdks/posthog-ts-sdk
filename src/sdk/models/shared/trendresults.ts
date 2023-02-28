@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { TrendResult } from "./trendresult";
+import { Expose, Transform, Type } from "class-transformer";
 
 export enum TrendResultsTimezoneEnum {
     AfricaAbidjan = "Africa/Abidjan",
@@ -444,15 +445,21 @@ export enum TrendResultsTimezoneEnum {
 }
 
 export class TrendResults extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=is_cached" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_cached" })
   isCached: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=last_refresh" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_refresh" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastRefresh: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=result", elemType: TrendResult })
+  @SpeakeasyMetadata({ elemType: TrendResult })
+  @Expose({ name: "result" })
+  @Type(() => TrendResult)
   result: TrendResult[];
 
-  @SpeakeasyMetadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "timezone" })
   timezone?: TrendResultsTimezoneEnum;
 }

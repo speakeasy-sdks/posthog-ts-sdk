@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class FeatureFlags {
   _defaultClient: AxiosInstance;
@@ -37,6 +39,7 @@ export class FeatureFlags {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -51,7 +54,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlag = httpRes?.data;
+              res.featureFlag = plainToInstance(
+                shared.FeatureFlag,
+                httpRes?.data as shared.FeatureFlag,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -79,6 +86,7 @@ export class FeatureFlags {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -93,7 +101,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlag = httpRes?.data;
+              res.featureFlag = plainToInstance(
+                shared.FeatureFlag,
+                httpRes?.data as shared.FeatureFlag,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -130,6 +142,7 @@ export class FeatureFlags {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -149,7 +162,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlag = httpRes?.data;
+              res.featureFlag = plainToInstance(
+                shared.FeatureFlag,
+                httpRes?.data as shared.FeatureFlag,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -174,6 +191,7 @@ export class FeatureFlags {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/feature_flags/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -214,6 +232,7 @@ export class FeatureFlags {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -228,7 +247,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlag = httpRes?.data;
+              res.featureFlag = plainToInstance(
+                shared.FeatureFlag,
+                httpRes?.data as shared.FeatureFlag,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -255,19 +278,13 @@ export class FeatureFlags {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/feature_flags/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -278,7 +295,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedFeatureFlagList = httpRes?.data;
+              res.paginatedFeatureFlagList = plainToInstance(
+                shared.PaginatedFeatureFlagList,
+                httpRes?.data as shared.PaginatedFeatureFlagList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -306,6 +327,7 @@ export class FeatureFlags {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -320,7 +342,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlag = httpRes?.data;
+              res.featureFlag = plainToInstance(
+                shared.FeatureFlag,
+                httpRes?.data as shared.FeatureFlag,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -348,6 +374,7 @@ export class FeatureFlags {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -362,7 +389,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlag = httpRes?.data;
+              res.featureFlag = plainToInstance(
+                shared.FeatureFlag,
+                httpRes?.data as shared.FeatureFlag,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -399,6 +430,7 @@ export class FeatureFlags {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -417,7 +449,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlag = httpRes?.data;
+              res.featureFlag = plainToInstance(
+                shared.FeatureFlag,
+                httpRes?.data as shared.FeatureFlag,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -445,6 +481,7 @@ export class FeatureFlags {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -459,7 +496,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlag = httpRes?.data;
+              res.featureFlag = plainToInstance(
+                shared.FeatureFlag,
+                httpRes?.data as shared.FeatureFlag,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -491,6 +532,7 @@ export class FeatureFlags {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -510,7 +552,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlagRoleAccess = httpRes?.data;
+              res.featureFlagRoleAccess = plainToInstance(
+                shared.FeatureFlagRoleAccessOutput,
+                httpRes?.data as shared.FeatureFlagRoleAccessOutput,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -532,6 +578,7 @@ export class FeatureFlags {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/feature_flags/{parent_lookup_feature_flag_id}/role_access/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -566,19 +613,13 @@ export class FeatureFlags {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/feature_flags/{parent_lookup_feature_flag_id}/role_access/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -589,7 +630,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedFeatureFlagRoleAccessList = httpRes?.data;
+              res.paginatedFeatureFlagRoleAccessList = plainToInstance(
+                shared.PaginatedFeatureFlagRoleAccessList,
+                httpRes?.data as shared.PaginatedFeatureFlagRoleAccessList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -612,6 +657,7 @@ export class FeatureFlags {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -626,7 +672,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlagRoleAccess = httpRes?.data;
+              res.featureFlagRoleAccess = plainToInstance(
+                shared.FeatureFlagRoleAccessOutput,
+                httpRes?.data as shared.FeatureFlagRoleAccessOutput,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -663,6 +713,7 @@ export class FeatureFlags {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -682,7 +733,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlag = httpRes?.data;
+              res.featureFlag = plainToInstance(
+                shared.FeatureFlag,
+                httpRes?.data as shared.FeatureFlag,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -719,6 +774,7 @@ export class FeatureFlags {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -738,7 +794,11 @@ export class FeatureFlags {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.featureFlag = httpRes?.data;
+              res.featureFlag = plainToInstance(
+                shared.FeatureFlag,
+                httpRes?.data as shared.FeatureFlag,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

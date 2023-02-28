@@ -1,57 +1,76 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 export class OrganizationDomainInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=domain, form, name=domain;, multipart_form, name=domain" })
+  @SpeakeasyMetadata({ data: "form, name=domain, multipart_form, name=domain" })
+  @Expose({ name: "domain" })
   domain: string;
 
-  @SpeakeasyMetadata({ data: "json, name=jit_provisioning_enabled, form, name=jit_provisioning_enabled;, multipart_form, name=jit_provisioning_enabled" })
+  @SpeakeasyMetadata({ data: "form, name=jit_provisioning_enabled, multipart_form, name=jit_provisioning_enabled" })
+  @Expose({ name: "jit_provisioning_enabled" })
   jitProvisioningEnabled?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=saml_acs_url, form, name=saml_acs_url;, multipart_form, name=saml_acs_url" })
+  @SpeakeasyMetadata({ data: "form, name=saml_acs_url, multipart_form, name=saml_acs_url" })
+  @Expose({ name: "saml_acs_url" })
   samlAcsUrl?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=saml_entity_id, form, name=saml_entity_id;, multipart_form, name=saml_entity_id" })
+  @SpeakeasyMetadata({ data: "form, name=saml_entity_id, multipart_form, name=saml_entity_id" })
+  @Expose({ name: "saml_entity_id" })
   samlEntityId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=saml_x509_cert, form, name=saml_x509_cert;, multipart_form, name=saml_x509_cert" })
+  @SpeakeasyMetadata({ data: "form, name=saml_x509_cert, multipart_form, name=saml_x509_cert" })
+  @Expose({ name: "saml_x509_cert" })
   samlX509Cert?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=sso_enforcement, form, name=sso_enforcement;, multipart_form, name=sso_enforcement" })
+  @SpeakeasyMetadata({ data: "form, name=sso_enforcement, multipart_form, name=sso_enforcement" })
+  @Expose({ name: "sso_enforcement" })
   ssoEnforcement?: string;
 }
 
 export class OrganizationDomain extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "domain" })
   domain: string;
 
-  @SpeakeasyMetadata({ data: "json, name=has_saml" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "has_saml" })
   hasSaml: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: string;
 
-  @SpeakeasyMetadata({ data: "json, name=is_verified" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_verified" })
   isVerified: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=jit_provisioning_enabled" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "jit_provisioning_enabled" })
   jitProvisioningEnabled?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=saml_acs_url" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "saml_acs_url" })
   samlAcsUrl?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=saml_entity_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "saml_entity_id" })
   samlEntityId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=saml_x509_cert" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "saml_x509_cert" })
   samlX509Cert?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=sso_enforcement" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "sso_enforcement" })
   ssoEnforcement?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=verification_challenge" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "verification_challenge" })
   verificationChallenge: string;
 
-  @SpeakeasyMetadata({ data: "json, name=verified_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "verified_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   verifiedAt: Date;
 }

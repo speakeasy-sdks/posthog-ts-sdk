@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Hooks {
   _defaultClient: AxiosInstance;
@@ -44,6 +46,7 @@ export class Hooks {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -63,7 +66,11 @@ export class Hooks {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.hook = httpRes?.data;
+              res.hook = plainToInstance(
+                shared.Hook,
+                httpRes?.data as shared.Hook,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -88,6 +95,7 @@ export class Hooks {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/hooks/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -125,19 +133,13 @@ export class Hooks {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/hooks/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -148,7 +150,11 @@ export class Hooks {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedHookList = httpRes?.data;
+              res.paginatedHookList = plainToInstance(
+                shared.PaginatedHookList,
+                httpRes?.data as shared.PaginatedHookList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -183,6 +189,7 @@ export class Hooks {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -201,7 +208,11 @@ export class Hooks {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.hook = httpRes?.data;
+              res.hook = plainToInstance(
+                shared.Hook,
+                httpRes?.data as shared.Hook,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -227,6 +238,7 @@ export class Hooks {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -241,7 +253,11 @@ export class Hooks {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.hook = httpRes?.data;
+              res.hook = plainToInstance(
+                shared.Hook,
+                httpRes?.data as shared.Hook,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -276,6 +292,7 @@ export class Hooks {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -295,7 +312,11 @@ export class Hooks {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.hook = httpRes?.data;
+              res.hook = plainToInstance(
+                shared.Hook,
+                httpRes?.data as shared.Hook,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

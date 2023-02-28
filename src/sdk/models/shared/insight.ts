@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { DashboardTileBasic } from "./dashboardtilebasic";
+import { Expose, Transform, Type } from "class-transformer";
 
 
 // InsightInput
@@ -7,71 +8,92 @@ import { DashboardTileBasic } from "./dashboardtilebasic";
  * Simplified serializer to speed response times when loading large amounts of objects.
 **/
 export class InsightInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=dashboards" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "dashboards" })
   dashboards?: number[];
 
-  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=derived_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "derived_name" })
   derivedName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=favorited" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "favorited" })
   favorited?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=order" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "order" })
   order?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=query" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "query" })
   query?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=saved" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "saved" })
   saved?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "tags" })
   tags?: any[];
 }
 
 export class InsightCreatedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
 export class InsightLastModifiedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
@@ -80,81 +102,113 @@ export class InsightLastModifiedBy extends SpeakeasyBase {
  * Simplified serializer to speed response times when loading large amounts of objects.
 **/
 export class Insight extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
+  @Type(() => InsightCreatedBy)
   createdBy: InsightCreatedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=dashboard_tiles", elemType: DashboardTileBasic })
+  @SpeakeasyMetadata({ elemType: DashboardTileBasic })
+  @Expose({ name: "dashboard_tiles" })
+  @Type(() => DashboardTileBasic)
   dashboardTiles: DashboardTileBasic[];
 
-  @SpeakeasyMetadata({ data: "json, name=dashboards" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "dashboards" })
   dashboards?: number[];
 
-  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=derived_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "derived_name" })
   derivedName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=effective_privilege_level" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "effective_privilege_level" })
   effectivePrivilegeLevel: number;
 
-  @SpeakeasyMetadata({ data: "json, name=effective_restriction_level" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "effective_restriction_level" })
   effectiveRestrictionLevel: number;
 
-  @SpeakeasyMetadata({ data: "json, name=favorited" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "favorited" })
   favorited?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=is_cached" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_cached" })
   isCached: string;
 
-  @SpeakeasyMetadata({ data: "json, name=is_sample" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_sample" })
   isSample: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=last_modified_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_modified_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastModifiedAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=last_modified_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_modified_by" })
+  @Type(() => InsightLastModifiedBy)
   lastModifiedBy: InsightLastModifiedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=last_refresh" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_refresh" })
   lastRefresh: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=order" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "order" })
   order?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=query" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "query" })
   query?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=result" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "result" })
   result: string;
 
-  @SpeakeasyMetadata({ data: "json, name=saved" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "saved" })
   saved?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=short_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "short_id" })
   shortId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "tags" })
   tags?: any[];
 
-  @SpeakeasyMetadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "timezone" })
   timezone: string;
 
-  @SpeakeasyMetadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "updated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   updatedAt: Date;
 }

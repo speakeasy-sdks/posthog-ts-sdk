@@ -1,17 +1,23 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { SessionRecordingPlaylist } from "./sessionrecordingplaylist";
+import { Expose, Type } from "class-transformer";
 
 
 export class PaginatedSessionRecordingPlaylistList extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=count" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "count" })
   count?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=next" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "next" })
   next?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "previous" })
   previous?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=results", elemType: SessionRecordingPlaylist })
+  @SpeakeasyMetadata({ elemType: SessionRecordingPlaylist })
+  @Expose({ name: "results" })
+  @Type(() => SessionRecordingPlaylist)
   results?: SessionRecordingPlaylist[];
 }

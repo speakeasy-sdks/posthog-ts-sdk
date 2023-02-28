@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Groups {
   _defaultClient: AxiosInstance;
@@ -31,19 +33,13 @@ export class Groups {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/groups/find/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -54,7 +50,11 @@ export class Groups {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.group = httpRes?.data;
+              res.group = plainToInstance(
+                shared.Group,
+                httpRes?.data as shared.Group,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -76,19 +76,13 @@ export class Groups {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/groups/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -99,7 +93,11 @@ export class Groups {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedGroupList = httpRes?.data;
+              res.paginatedGroupList = plainToInstance(
+                shared.PaginatedGroupList,
+                httpRes?.data as shared.PaginatedGroupList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -122,6 +120,7 @@ export class Groups {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -136,7 +135,11 @@ export class Groups {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.group = httpRes?.data;
+              res.group = plainToInstance(
+                shared.Group,
+                httpRes?.data as shared.Group,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -158,19 +161,13 @@ export class Groups {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/groups/property_values/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -181,7 +178,11 @@ export class Groups {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.group = httpRes?.data;
+              res.group = plainToInstance(
+                shared.Group,
+                httpRes?.data as shared.Group,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -203,19 +204,13 @@ export class Groups {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/groups/related/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -226,7 +221,11 @@ export class Groups {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.group = httpRes?.data;
+              res.group = plainToInstance(
+                shared.Group,
+                httpRes?.data as shared.Group,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

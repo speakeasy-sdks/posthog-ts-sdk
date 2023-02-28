@@ -29,6 +29,7 @@ export class Prompts {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "patch",
@@ -60,6 +61,7 @@ export class Prompts {
     const url: string = baseURL.replace(/\/$/, "") + "/api/prompts/my_prompts/";
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,

@@ -1,20 +1,26 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform, Type } from "class-transformer";
 
 
 export class FeatureFlagRoleAccessFeatureFlagCreatedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
@@ -23,113 +29,155 @@ export class FeatureFlagRoleAccessFeatureFlagCreatedBy extends SpeakeasyBase {
  * Serializer mixin that resolves appropriate response for tags depending on license.
 **/
 export class FeatureFlagRoleAccessFeatureFlag extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=active" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "active" })
   active?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=can_edit" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "can_edit" })
   canEdit: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
+  @Type(() => FeatureFlagRoleAccessFeatureFlagCreatedBy)
   createdBy: FeatureFlagRoleAccessFeatureFlagCreatedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=ensure_experience_continuity" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "ensure_experience_continuity" })
   ensureExperienceContinuity?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=experiment_set" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "experiment_set" })
   experimentSet: number[];
 
-  @SpeakeasyMetadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=is_simple_flag" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_simple_flag" })
   isSimpleFlag: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=key" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "key" })
   key: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=performed_rollback" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "performed_rollback" })
   performedRollback?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=rollback_conditions" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "rollback_conditions" })
   rollbackConditions?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=rollout_percentage" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "rollout_percentage" })
   rolloutPercentage: number;
 
-  @SpeakeasyMetadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "tags" })
   tags?: any[];
 }
 
 export class FeatureFlagRoleAccessRoleCreatedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
 export class FeatureFlagRoleAccessRole extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=associated_flags" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "associated_flags" })
   associatedFlags: string;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
+  @Type(() => FeatureFlagRoleAccessRoleCreatedBy)
   createdBy: FeatureFlagRoleAccessRoleCreatedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=feature_flags_access_level" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "feature_flags_access_level" })
   featureFlagsAccessLevel?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: string;
 
-  @SpeakeasyMetadata({ data: "json, name=members" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "members" })
   members: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name: string;
 }
 
 export class FeatureFlagRoleAccessOutput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=added_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "added_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   addedAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=feature_flag" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "feature_flag" })
+  @Type(() => FeatureFlagRoleAccessFeatureFlag)
   featureFlag: FeatureFlagRoleAccessFeatureFlag;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=role" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "role" })
+  @Type(() => FeatureFlagRoleAccessRole)
   role: FeatureFlagRoleAccessRole;
 
-  @SpeakeasyMetadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "updated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   updatedAt: Date;
 }
 
 export class FeatureFlagRoleAccessInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=role_id, form, name=role_id;, multipart_form, name=role_id" })
+  @SpeakeasyMetadata({ data: "form, name=role_id, multipart_form, name=role_id" })
+  @Expose({ name: "role_id" })
   roleId: string;
 }

@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
+import * as shared from "./models/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class GroupsTypes {
   _defaultClient: AxiosInstance;
@@ -32,6 +34,7 @@ export class GroupsTypes {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -46,7 +49,11 @@ export class GroupsTypes {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.groupTypes = httpRes?.data;
+              res.groupTypes = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -78,6 +85,7 @@ export class GroupsTypes {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -96,7 +104,11 @@ export class GroupsTypes {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.groupType = httpRes?.data;
+              res.groupType = plainToInstance(
+                shared.GroupType,
+                httpRes?.data as shared.GroupType,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

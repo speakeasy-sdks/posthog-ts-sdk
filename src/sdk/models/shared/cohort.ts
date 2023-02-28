@@ -1,80 +1,108 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform, Type } from "class-transformer";
 
 
 export class CohortInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=deleted, form, name=deleted;, multipart_form, name=deleted" })
+  @SpeakeasyMetadata({ data: "form, name=deleted, multipart_form, name=deleted" })
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=description, form, name=description;, multipart_form, name=description" })
+  @SpeakeasyMetadata({ data: "form, name=description, multipart_form, name=description" })
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=filters, form, name=filters;json=true, multipart_form, name=filters;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=filters;json=true, multipart_form, name=filters;json=true" })
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=groups, form, name=groups;json=true, multipart_form, name=groups;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=groups;json=true, multipart_form, name=groups;json=true" })
+  @Expose({ name: "groups" })
   groups?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=is_static, form, name=is_static;, multipart_form, name=is_static" })
+  @SpeakeasyMetadata({ data: "form, name=is_static, multipart_form, name=is_static" })
+  @Expose({ name: "is_static" })
   isStatic?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;, multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "form, name=name, multipart_form, name=name" })
+  @Expose({ name: "name" })
   name?: string;
 }
 
 export class CohortCreatedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
 export class Cohort extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=count" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "count" })
   count: number;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
+  @Type(() => CohortCreatedBy)
   createdBy: CohortCreatedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=errors_calculating" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "errors_calculating" })
   errorsCalculating: number;
 
-  @SpeakeasyMetadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=groups" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "groups" })
   groups?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=is_calculating" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_calculating" })
   isCalculating: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=is_static" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_static" })
   isStatic?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=last_calculation" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_calculation" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastCalculation: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 }

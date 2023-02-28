@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform, Type } from "class-transformer";
 
 export enum SubscriptionByweekdayEnum {
     Monday = "monday",
@@ -26,63 +27,84 @@ export enum SubscriptionTargetTypeEnum {
  * Standard Subscription serializer.
 **/
 export class SubscriptionInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=bysetpos, form, name=bysetpos;, multipart_form, name=bysetpos" })
+  @SpeakeasyMetadata({ data: "form, name=bysetpos, multipart_form, name=bysetpos" })
+  @Expose({ name: "bysetpos" })
   bysetpos?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=byweekday, form, name=byweekday;, multipart_form, name=byweekday" })
+  @SpeakeasyMetadata({ data: "form, name=byweekday, multipart_form, name=byweekday" })
+  @Expose({ name: "byweekday" })
   byweekday?: SubscriptionByweekdayEnum[];
 
-  @SpeakeasyMetadata({ data: "json, name=count, form, name=count;, multipart_form, name=count" })
+  @SpeakeasyMetadata({ data: "form, name=count, multipart_form, name=count" })
+  @Expose({ name: "count" })
   count?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=dashboard, form, name=dashboard;, multipart_form, name=dashboard" })
+  @SpeakeasyMetadata({ data: "form, name=dashboard, multipart_form, name=dashboard" })
+  @Expose({ name: "dashboard" })
   dashboard?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=deleted, form, name=deleted;, multipart_form, name=deleted" })
+  @SpeakeasyMetadata({ data: "form, name=deleted, multipart_form, name=deleted" })
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=frequency, form, name=frequency;, multipart_form, name=frequency" })
+  @SpeakeasyMetadata({ data: "form, name=frequency, multipart_form, name=frequency" })
+  @Expose({ name: "frequency" })
   frequency: SubscriptionFrequencyEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=insight, form, name=insight;, multipart_form, name=insight" })
+  @SpeakeasyMetadata({ data: "form, name=insight, multipart_form, name=insight" })
+  @Expose({ name: "insight" })
   insight?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=interval, form, name=interval;, multipart_form, name=interval" })
+  @SpeakeasyMetadata({ data: "form, name=interval, multipart_form, name=interval" })
+  @Expose({ name: "interval" })
   interval?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=invite_message, form, name=invite_message;, multipart_form, name=invite_message" })
+  @SpeakeasyMetadata({ data: "form, name=invite_message, multipart_form, name=invite_message" })
+  @Expose({ name: "invite_message" })
   inviteMessage?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=start_date, form, name=start_date;, multipart_form, name=start_date" })
+  @SpeakeasyMetadata({ data: "form, name=start_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=start_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "start_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   startDate: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=target_type, form, name=target_type;, multipart_form, name=target_type" })
+  @SpeakeasyMetadata({ data: "form, name=target_type, multipart_form, name=target_type" })
+  @Expose({ name: "target_type" })
   targetType: SubscriptionTargetTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=target_value, form, name=target_value;, multipart_form, name=target_value" })
+  @SpeakeasyMetadata({ data: "form, name=target_value, multipart_form, name=target_value" })
+  @Expose({ name: "target_value" })
   targetValue: string;
 
-  @SpeakeasyMetadata({ data: "json, name=title, form, name=title;, multipart_form, name=title" })
+  @SpeakeasyMetadata({ data: "form, name=title, multipart_form, name=title" })
+  @Expose({ name: "title" })
   title?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=until_date, form, name=until_date;, multipart_form, name=until_date" })
+  @SpeakeasyMetadata({ data: "form, name=until_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=until_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "until_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   untilDate?: Date;
 }
 
 export class SubscriptionCreatedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
@@ -91,60 +113,84 @@ export class SubscriptionCreatedBy extends SpeakeasyBase {
  * Standard Subscription serializer.
 **/
 export class Subscription extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=bysetpos" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "bysetpos" })
   bysetpos?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=byweekday" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "byweekday" })
   byweekday?: SubscriptionByweekdayEnum[];
 
-  @SpeakeasyMetadata({ data: "json, name=count" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "count" })
   count?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
+  @Type(() => SubscriptionCreatedBy)
   createdBy: SubscriptionCreatedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=dashboard" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "dashboard" })
   dashboard?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "frequency" })
   frequency: SubscriptionFrequencyEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=insight" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "insight" })
   insight?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=interval" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "interval" })
   interval?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=invite_message" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "invite_message" })
   inviteMessage?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=next_delivery_date" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "next_delivery_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   nextDeliveryDate: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=start_date" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "start_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   startDate: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "summary" })
   summary: string;
 
-  @SpeakeasyMetadata({ data: "json, name=target_type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "target_type" })
   targetType: SubscriptionTargetTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=target_value" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "target_value" })
   targetValue: string;
 
-  @SpeakeasyMetadata({ data: "json, name=title" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "title" })
   title?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=until_date" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "until_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   untilDate?: Date;
 }

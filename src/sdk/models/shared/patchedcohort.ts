@@ -1,22 +1,29 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 export class PatchedCohortInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=deleted, form, name=deleted;, multipart_form, name=deleted" })
+  @SpeakeasyMetadata({ data: "form, name=deleted, multipart_form, name=deleted" })
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=description, form, name=description;, multipart_form, name=description" })
+  @SpeakeasyMetadata({ data: "form, name=description, multipart_form, name=description" })
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=filters, form, name=filters;json=true, multipart_form, name=filters;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=filters;json=true, multipart_form, name=filters;json=true" })
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=groups, form, name=groups;json=true, multipart_form, name=groups;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=groups;json=true, multipart_form, name=groups;json=true" })
+  @Expose({ name: "groups" })
   groups?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=is_static, form, name=is_static;, multipart_form, name=is_static" })
+  @SpeakeasyMetadata({ data: "form, name=is_static, multipart_form, name=is_static" })
+  @Expose({ name: "is_static" })
   isStatic?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;, multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "form, name=name, multipart_form, name=name" })
+  @Expose({ name: "name" })
   name?: string;
 }

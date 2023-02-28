@@ -1,16 +1,21 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 export class GroupType extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=group_type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "group_type" })
   groupType: string;
 
-  @SpeakeasyMetadata({ data: "json, name=group_type_index" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "group_type_index" })
   groupTypeIndex: number;
 
-  @SpeakeasyMetadata({ data: "json, name=name_plural" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name_plural" })
   namePlural?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name_singular" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name_singular" })
   nameSingular?: string;
 }
