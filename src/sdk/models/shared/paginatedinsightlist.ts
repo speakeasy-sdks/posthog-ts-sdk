@@ -1,17 +1,23 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Insight } from "./insight";
+import { Expose, Type } from "class-transformer";
 
 
 export class PaginatedInsightList extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=count" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "count" })
   count?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=next" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "next" })
   next?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "previous" })
   previous?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=results", elemType: Insight })
+  @SpeakeasyMetadata({ elemType: Insight })
+  @Expose({ name: "results" })
+  @Type(() => Insight)
   results?: Insight[];
 }

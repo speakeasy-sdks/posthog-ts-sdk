@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Experiments {
   _defaultClient: AxiosInstance;
@@ -41,6 +43,7 @@ export class Experiments {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -60,7 +63,11 @@ export class Experiments {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.experiment = httpRes?.data;
+              res.experiment = plainToInstance(
+                shared.Experiment,
+                httpRes?.data as shared.Experiment,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -82,6 +89,7 @@ export class Experiments {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/experiments/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -116,19 +124,13 @@ export class Experiments {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/experiments/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -139,7 +141,11 @@ export class Experiments {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedExperimentList = httpRes?.data;
+              res.paginatedExperimentList = plainToInstance(
+                shared.PaginatedExperimentList,
+                httpRes?.data as shared.PaginatedExperimentList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -171,6 +177,7 @@ export class Experiments {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -189,7 +196,11 @@ export class Experiments {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.experiment = httpRes?.data;
+              res.experiment = plainToInstance(
+                shared.Experiment,
+                httpRes?.data as shared.Experiment,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -212,6 +223,7 @@ export class Experiments {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -226,7 +238,11 @@ export class Experiments {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.experiment = httpRes?.data;
+              res.experiment = plainToInstance(
+                shared.Experiment,
+                httpRes?.data as shared.Experiment,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -249,6 +265,7 @@ export class Experiments {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -263,7 +280,11 @@ export class Experiments {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.experiment = httpRes?.data;
+              res.experiment = plainToInstance(
+                shared.Experiment,
+                httpRes?.data as shared.Experiment,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -286,6 +307,7 @@ export class Experiments {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -300,7 +322,11 @@ export class Experiments {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.experiment = httpRes?.data;
+              res.experiment = plainToInstance(
+                shared.Experiment,
+                httpRes?.data as shared.Experiment,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -323,6 +349,7 @@ export class Experiments {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -337,7 +364,11 @@ export class Experiments {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.experiment = httpRes?.data;
+              res.experiment = plainToInstance(
+                shared.Experiment,
+                httpRes?.data as shared.Experiment,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -369,6 +400,7 @@ export class Experiments {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -388,7 +420,11 @@ export class Experiments {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.experiment = httpRes?.data;
+              res.experiment = plainToInstance(
+                shared.Experiment,
+                httpRes?.data as shared.Experiment,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

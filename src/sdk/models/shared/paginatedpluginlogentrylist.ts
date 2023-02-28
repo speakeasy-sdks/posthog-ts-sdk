@@ -1,17 +1,23 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { PluginLogEntry } from "./pluginlogentry";
+import { Expose, Type } from "class-transformer";
 
 
 export class PaginatedPluginLogEntryList extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=count" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "count" })
   count?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=next" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "next" })
   next?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "previous" })
   previous?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=results", elemType: PluginLogEntry })
+  @SpeakeasyMetadata({ elemType: PluginLogEntry })
+  @Expose({ name: "results" })
+  @Type(() => PluginLogEntry)
   results?: PluginLogEntry[];
 }

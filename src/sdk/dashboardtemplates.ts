@@ -41,6 +41,7 @@ export class DashboardTemplates {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -76,6 +77,7 @@ export class DashboardTemplates {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/dashboard_templates/repository/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,

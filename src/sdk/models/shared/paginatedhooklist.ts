@@ -1,17 +1,23 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Hook } from "./hook";
+import { Expose, Type } from "class-transformer";
 
 
 export class PaginatedHookList extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=count" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "count" })
   count?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=next" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "next" })
   next?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "previous" })
   previous?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=results", elemType: Hook })
+  @SpeakeasyMetadata({ elemType: Hook })
+  @Expose({ name: "results" })
+  @Type(() => Hook)
   results?: Hook[];
 }

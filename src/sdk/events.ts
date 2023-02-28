@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Events {
   _defaultClient: AxiosInstance;
@@ -31,19 +33,13 @@ export class Events {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/events/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -54,7 +50,11 @@ export class Events {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clickhouseEvent = httpRes?.data;
+              res.clickhouseEvent = plainToInstance(
+                shared.ClickhouseEvent,
+                httpRes?.data as shared.ClickhouseEvent,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `text/csv`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -82,19 +82,13 @@ export class Events {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/events/values/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -105,7 +99,11 @@ export class Events {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.clickhouseEvent = httpRes?.data;
+              res.clickhouseEvent = plainToInstance(
+                shared.ClickhouseEvent,
+                httpRes?.data as shared.ClickhouseEvent,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `text/csv`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);

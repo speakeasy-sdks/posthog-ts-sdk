@@ -1,17 +1,23 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Property } from "./property";
+import { Expose, Type } from "class-transformer";
 
 
 export class FunnelExclusion extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=funnel_from_step" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "funnel_from_step" })
   funnelFromStep?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=funnel_to_step" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "funnel_to_step" })
   funnelToStep?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: string;
 
-  @SpeakeasyMetadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "properties" })
+  @Type(() => Property)
   properties?: Property;
 }

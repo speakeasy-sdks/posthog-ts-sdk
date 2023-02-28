@@ -32,6 +32,7 @@ export class SessionRecordings {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -65,6 +66,7 @@ export class SessionRecordings {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/session_recordings/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -100,6 +102,7 @@ export class SessionRecordings {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -133,6 +136,7 @@ export class SessionRecordings {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/session_recordings/{id}/snapshots/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,

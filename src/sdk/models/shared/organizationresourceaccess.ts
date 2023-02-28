@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 export enum OrganizationResourceAccessResourceEnum {
     FeatureFlags = "feature flags",
@@ -11,32 +12,43 @@ export enum OrganizationResourceAccessResourceEnum {
 }
 
 export class OrganizationResourceAccessInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=access_level, form, name=access_level;, multipart_form, name=access_level" })
+  @SpeakeasyMetadata({ data: "form, name=access_level, multipart_form, name=access_level" })
+  @Expose({ name: "access_level" })
   accessLevel?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=resource, form, name=resource;, multipart_form, name=resource" })
+  @SpeakeasyMetadata({ data: "form, name=resource, multipart_form, name=resource" })
+  @Expose({ name: "resource" })
   resource: OrganizationResourceAccessResourceEnum;
 }
 
 export class OrganizationResourceAccess extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=access_level" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "access_level" })
   accessLevel?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
   createdBy: number;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=organization" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "organization" })
   organization: string;
 
-  @SpeakeasyMetadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "resource" })
   resource: OrganizationResourceAccessResourceEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "updated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   updatedAt: Date;
 }

@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 // PatchedFeatureFlagInput
@@ -6,33 +7,44 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * Serializer mixin that resolves appropriate response for tags depending on license.
 **/
 export class PatchedFeatureFlagInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=active, form, name=active;, multipart_form, name=active" })
+  @SpeakeasyMetadata({ data: "form, name=active, multipart_form, name=active" })
+  @Expose({ name: "active" })
   active?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at, form, name=created_at;, multipart_form, name=created_at" })
+  @SpeakeasyMetadata({ data: "form, name=created_at;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=created_at;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=deleted, form, name=deleted;, multipart_form, name=deleted" })
+  @SpeakeasyMetadata({ data: "form, name=deleted, multipart_form, name=deleted" })
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=ensure_experience_continuity, form, name=ensure_experience_continuity;, multipart_form, name=ensure_experience_continuity" })
+  @SpeakeasyMetadata({ data: "form, name=ensure_experience_continuity, multipart_form, name=ensure_experience_continuity" })
+  @Expose({ name: "ensure_experience_continuity" })
   ensureExperienceContinuity?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=filters, form, name=filters;json=true, multipart_form, name=filters;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=filters;json=true, multipart_form, name=filters;json=true" })
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=key, form, name=key;, multipart_form, name=key" })
+  @SpeakeasyMetadata({ data: "form, name=key, multipart_form, name=key" })
+  @Expose({ name: "key" })
   key?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;, multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "form, name=name, multipart_form, name=name" })
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=performed_rollback, form, name=performed_rollback;, multipart_form, name=performed_rollback" })
+  @SpeakeasyMetadata({ data: "form, name=performed_rollback, multipart_form, name=performed_rollback" })
+  @Expose({ name: "performed_rollback" })
   performedRollback?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=rollback_conditions, form, name=rollback_conditions;json=true, multipart_form, name=rollback_conditions;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=rollback_conditions;json=true, multipart_form, name=rollback_conditions;json=true" })
+  @Expose({ name: "rollback_conditions" })
   rollbackConditions?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;, multipart_form, name=tags" })
+  @SpeakeasyMetadata({ data: "form, name=tags, multipart_form, name=tags" })
+  @Expose({ name: "tags" })
   tags?: any[];
 }

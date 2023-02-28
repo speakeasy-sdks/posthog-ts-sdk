@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 export enum ExportedAssetExportFormatEnum {
     ImagePng = "image/png",
@@ -11,28 +12,37 @@ export enum ExportedAssetExportFormatEnum {
  * Standard ExportedAsset serializer that doesn't return content.
 **/
 export class ExportedAsset extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=dashboard" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "dashboard" })
   dashboard?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=export_context" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "export_context" })
   exportContext?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=export_format" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "export_format" })
   exportFormat: ExportedAssetExportFormatEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filename" })
   filename: string;
 
-  @SpeakeasyMetadata({ data: "json, name=has_content" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "has_content" })
   hasContent: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=insight" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "insight" })
   insight?: number;
 }
 
@@ -41,15 +51,19 @@ export class ExportedAsset extends SpeakeasyBase {
  * Standard ExportedAsset serializer that doesn't return content.
 **/
 export class ExportedAssetInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=dashboard, form, name=dashboard;, multipart_form, name=dashboard" })
+  @SpeakeasyMetadata({ data: "form, name=dashboard, multipart_form, name=dashboard" })
+  @Expose({ name: "dashboard" })
   dashboard?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=export_context, form, name=export_context;json=true, multipart_form, name=export_context;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=export_context;json=true, multipart_form, name=export_context;json=true" })
+  @Expose({ name: "export_context" })
   exportContext?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=export_format, form, name=export_format;, multipart_form, name=export_format" })
+  @SpeakeasyMetadata({ data: "form, name=export_format, multipart_form, name=export_format" })
+  @Expose({ name: "export_format" })
   exportFormat: ExportedAssetExportFormatEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=insight, form, name=insight;, multipart_form, name=insight" })
+  @SpeakeasyMetadata({ data: "form, name=insight, multipart_form, name=insight" })
+  @Expose({ name: "insight" })
   insight?: number;
 }

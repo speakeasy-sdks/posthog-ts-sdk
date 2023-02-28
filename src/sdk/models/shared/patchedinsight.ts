@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 // PatchedInsightInput
@@ -6,36 +7,47 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * Simplified serializer to speed response times when loading large amounts of objects.
 **/
 export class PatchedInsightInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=dashboards" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "dashboards" })
   dashboards?: number[];
 
-  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=derived_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "derived_name" })
   derivedName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=favorited" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "favorited" })
   favorited?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=order" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "order" })
   order?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=query" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "query" })
   query?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=saved" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "saved" })
   saved?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "tags" })
   tags?: any[];
 }

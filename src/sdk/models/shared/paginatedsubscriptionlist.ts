@@ -1,17 +1,23 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Subscription } from "./subscription";
+import { Expose, Type } from "class-transformer";
 
 
 export class PaginatedSubscriptionList extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=count" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "count" })
   count?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=next" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "next" })
   next?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "previous" })
   previous?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=results", elemType: Subscription })
+  @SpeakeasyMetadata({ elemType: Subscription })
+  @Expose({ name: "results" })
+  @Type(() => Subscription)
   results?: Subscription[];
 }

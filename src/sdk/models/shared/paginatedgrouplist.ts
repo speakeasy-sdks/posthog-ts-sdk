@@ -1,14 +1,19 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Group } from "./group";
+import { Expose, Type } from "class-transformer";
 
 
 export class PaginatedGroupList extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=next" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "next" })
   next?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "previous" })
   previous?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=results", elemType: Group })
+  @SpeakeasyMetadata({ elemType: Group })
+  @Expose({ name: "results" })
+  @Type(() => Group)
   results?: Group[];
 }

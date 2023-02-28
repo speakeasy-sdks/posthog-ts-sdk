@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 export enum PluginLogEntrySourceEnum {
     System = "SYSTEM",
@@ -14,30 +15,40 @@ export enum PluginLogEntryTypeEnum {
 }
 
 export class PluginLogEntry extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: string;
 
-  @SpeakeasyMetadata({ data: "json, name=instance_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "instance_id" })
   instanceId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=message" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "message" })
   message: string;
 
-  @SpeakeasyMetadata({ data: "json, name=plugin_config_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "plugin_config_id" })
   pluginConfigId: number;
 
-  @SpeakeasyMetadata({ data: "json, name=plugin_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "plugin_id" })
   pluginId: number;
 
-  @SpeakeasyMetadata({ data: "json, name=source" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "source" })
   source: PluginLogEntrySourceEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=team_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "team_id" })
   teamId: number;
 
-  @SpeakeasyMetadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "timestamp" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   timestamp: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type: PluginLogEntryTypeEnum;
 }

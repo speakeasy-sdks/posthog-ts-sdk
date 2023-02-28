@@ -1,39 +1,53 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 export class HookInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=event, form, name=event;, multipart_form, name=event" })
+  @SpeakeasyMetadata({ data: "form, name=event, multipart_form, name=event" })
+  @Expose({ name: "event" })
   event: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id, form, name=id;, multipart_form, name=id" })
+  @SpeakeasyMetadata({ data: "form, name=id, multipart_form, name=id" })
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=resource_id, form, name=resource_id;, multipart_form, name=resource_id" })
+  @SpeakeasyMetadata({ data: "form, name=resource_id, multipart_form, name=resource_id" })
+  @Expose({ name: "resource_id" })
   resourceId?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=target, form, name=target;, multipart_form, name=target" })
+  @SpeakeasyMetadata({ data: "form, name=target, multipart_form, name=target" })
+  @Expose({ name: "target" })
   target: string;
 }
 
 export class Hook extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=created" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   created: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=event" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "event" })
   event: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=resource_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "resource_id" })
   resourceId?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=target" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "target" })
   target: string;
 
-  @SpeakeasyMetadata({ data: "json, name=team" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "team" })
   team: number;
 
-  @SpeakeasyMetadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "updated" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   updated: Date;
 }

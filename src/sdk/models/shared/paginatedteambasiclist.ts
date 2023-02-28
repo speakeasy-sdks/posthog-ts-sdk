@@ -1,17 +1,23 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { TeamBasic } from "./teambasic";
+import { Expose, Type } from "class-transformer";
 
 
 export class PaginatedTeamBasicList extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=count" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "count" })
   count?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=next" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "next" })
   next?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "previous" })
   previous?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=results", elemType: TeamBasic })
+  @SpeakeasyMetadata({ elemType: TeamBasic })
+  @Expose({ name: "results" })
+  @Type(() => TeamBasic)
   results?: TeamBasic[];
 }

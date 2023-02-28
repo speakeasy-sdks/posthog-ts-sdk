@@ -1,20 +1,27 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { GenericInsights } from "./genericinsights";
+import { Expose, Type } from "class-transformer";
 
 
 export class TrendResult extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=data" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "data" })
   data: number[];
 
-  @SpeakeasyMetadata({ data: "json, name=days" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "days" })
   days: Date[];
 
-  @SpeakeasyMetadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filter" })
+  @Type(() => GenericInsights)
   filter: GenericInsights;
 
-  @SpeakeasyMetadata({ data: "json, name=label" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "label" })
   label: string;
 
-  @SpeakeasyMetadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "labels" })
   labels: string[];
 }

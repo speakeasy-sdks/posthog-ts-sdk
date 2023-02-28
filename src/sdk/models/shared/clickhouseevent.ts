@@ -1,28 +1,37 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 export class ClickhouseEvent extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=elements" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "elements" })
   elements: string;
 
-  @SpeakeasyMetadata({ data: "json, name=elements_chain" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "elements_chain" })
   elementsChain: string;
 
-  @SpeakeasyMetadata({ data: "json, name=event" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "event" })
   event: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: string;
 
-  @SpeakeasyMetadata({ data: "json, name=person" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "person" })
   person: string;
 
-  @SpeakeasyMetadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "properties" })
   properties: string;
 
-  @SpeakeasyMetadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "timestamp" })
   timestamp: string;
 }

@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Property } from "./property";
+import { Expose, Type } from "class-transformer";
 
 export enum FilterEventMathEnum {
     Total = "total",
@@ -26,12 +27,16 @@ export enum FilterEventMathEnum {
 }
 
 export class FilterEvent extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: string;
 
-  @SpeakeasyMetadata({ data: "json, name=math" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "math" })
   math?: FilterEventMathEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=properties", elemType: Property })
+  @SpeakeasyMetadata({ elemType: Property })
+  @Expose({ name: "properties" })
+  @Type(() => Property)
   properties?: Property[];
 }

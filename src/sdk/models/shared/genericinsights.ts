@@ -2,24 +2,34 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { FilterAction } from "./filteraction";
 import { FilterEvent } from "./filterevent";
 import { Property } from "./property";
+import { Expose, Type } from "class-transformer";
 
 
 export class GenericInsights extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=actions", elemType: FilterAction })
+  @SpeakeasyMetadata({ elemType: FilterAction })
+  @Expose({ name: "actions" })
+  @Type(() => FilterAction)
   actions?: FilterAction[];
 
-  @SpeakeasyMetadata({ data: "json, name=date_from" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "date_from" })
   dateFrom?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=date_to" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "date_to" })
   dateTo?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=events", elemType: FilterEvent })
+  @SpeakeasyMetadata({ elemType: FilterEvent })
+  @Expose({ name: "events" })
+  @Type(() => FilterEvent)
   events?: FilterEvent[];
 
-  @SpeakeasyMetadata({ data: "json, name=filter_test_accounts" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filter_test_accounts" })
   filterTestAccounts?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "properties" })
+  @Type(() => Property)
   properties?: Property;
 }

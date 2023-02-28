@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
+import * as shared from "./models/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class IsGeneratingDemoData {
   _defaultClient: AxiosInstance;
@@ -35,6 +37,7 @@ export class IsGeneratingDemoData {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -49,7 +52,11 @@ export class IsGeneratingDemoData {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.team = httpRes?.data;
+              res.team = plainToInstance(
+                shared.Team,
+                httpRes?.data as shared.Team,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
+import * as shared from "./models/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class ActivityLog {
   _defaultClient: AxiosInstance;
@@ -41,6 +43,7 @@ export class ActivityLog {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -60,7 +63,11 @@ export class ActivityLog {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.activityLog = httpRes?.data;
+              res.activityLog = plainToInstance(
+                shared.ActivityLog,
+                httpRes?.data as shared.ActivityLog,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -83,6 +90,7 @@ export class ActivityLog {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -97,7 +105,11 @@ export class ActivityLog {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.activityLog = httpRes?.data;
+              res.activityLog = plainToInstance(
+                shared.ActivityLog,
+                httpRes?.data as shared.ActivityLog,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

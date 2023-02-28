@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Actions {
   _defaultClient: AxiosInstance;
@@ -31,19 +33,13 @@ export class Actions {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/actions/{id}/count/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -54,7 +50,11 @@ export class Actions {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.action = httpRes?.data;
+              res.action = plainToInstance(
+                shared.Action,
+                httpRes?.data as shared.Action,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `text/csv`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -92,22 +92,16 @@ export class Actions {
     }
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...reqBodyHeaders, ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "post",
       headers: headers,
       data: reqBody, 
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -118,7 +112,11 @@ export class Actions {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.action = httpRes?.data;
+              res.action = plainToInstance(
+                shared.Action,
+                httpRes?.data as shared.Action,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `text/csv`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -149,19 +147,13 @@ export class Actions {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/actions/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "delete",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -191,19 +183,13 @@ export class Actions {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/actions/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -214,7 +200,11 @@ export class Actions {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedActionList = httpRes?.data;
+              res.paginatedActionList = plainToInstance(
+                shared.PaginatedActionList,
+                httpRes?.data as shared.PaginatedActionList,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `text/csv`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -252,22 +242,16 @@ export class Actions {
     }
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...reqBodyHeaders, ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "patch",
       headers: headers,
       data: reqBody, 
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -278,7 +262,11 @@ export class Actions {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.action = httpRes?.data;
+              res.action = plainToInstance(
+                shared.Action,
+                httpRes?.data as shared.Action,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `text/csv`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -306,19 +294,13 @@ export class Actions {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/actions/people/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -329,7 +311,11 @@ export class Actions {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.action = httpRes?.data;
+              res.action = plainToInstance(
+                shared.Action,
+                httpRes?.data as shared.Action,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `text/csv`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -357,19 +343,13 @@ export class Actions {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/actions/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -380,7 +360,11 @@ export class Actions {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.action = httpRes?.data;
+              res.action = plainToInstance(
+                shared.Action,
+                httpRes?.data as shared.Action,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `text/csv`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -418,22 +402,16 @@ export class Actions {
     }
     
     const client: AxiosInstance = this._defaultClient!;
-    const headers = {...reqBodyHeaders, ...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "put",
       headers: headers,
       data: reqBody, 
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -444,7 +422,11 @@ export class Actions {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.action = httpRes?.data;
+              res.action = plainToInstance(
+                shared.Action,
+                httpRes?.data as shared.Action,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `text/csv`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);

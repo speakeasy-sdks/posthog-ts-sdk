@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform, Type } from "class-transformer";
 
 
 // DashboardInput
@@ -6,51 +7,66 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * Serializer mixin that resolves appropriate response for tags depending on license.
 **/
 export class DashboardInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=delete_insights, form, name=delete_insights;, multipart_form, name=delete_insights" })
+  @SpeakeasyMetadata({ data: "form, name=delete_insights, multipart_form, name=delete_insights" })
+  @Expose({ name: "delete_insights" })
   deleteInsights?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=deleted, form, name=deleted;, multipart_form, name=deleted" })
+  @SpeakeasyMetadata({ data: "form, name=deleted, multipart_form, name=deleted" })
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=description, form, name=description;, multipart_form, name=description" })
+  @SpeakeasyMetadata({ data: "form, name=description, multipart_form, name=description" })
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=filters, form, name=filters;json=true, multipart_form, name=filters;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=filters;json=true, multipart_form, name=filters;json=true" })
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;, multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "form, name=name, multipart_form, name=name" })
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=pinned, form, name=pinned;, multipart_form, name=pinned" })
+  @SpeakeasyMetadata({ data: "form, name=pinned, multipart_form, name=pinned" })
+  @Expose({ name: "pinned" })
   pinned?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=restriction_level, form, name=restriction_level;, multipart_form, name=restriction_level" })
+  @SpeakeasyMetadata({ data: "form, name=restriction_level, multipart_form, name=restriction_level" })
+  @Expose({ name: "restriction_level" })
   restrictionLevel?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;, multipart_form, name=tags" })
+  @SpeakeasyMetadata({ data: "form, name=tags, multipart_form, name=tags" })
+  @Expose({ name: "tags" })
   tags?: any[];
 
-  @SpeakeasyMetadata({ data: "json, name=use_dashboard, form, name=use_dashboard;, multipart_form, name=use_dashboard" })
+  @SpeakeasyMetadata({ data: "form, name=use_dashboard, multipart_form, name=use_dashboard" })
+  @Expose({ name: "use_dashboard" })
   useDashboard?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=use_template, form, name=use_template;, multipart_form, name=use_template" })
+  @SpeakeasyMetadata({ data: "form, name=use_template, multipart_form, name=use_template" })
+  @Expose({ name: "use_template" })
   useTemplate?: string;
 }
 
 export class DashboardCreatedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 export enum DashboardCreationModeEnum {
@@ -64,48 +80,65 @@ export enum DashboardCreationModeEnum {
  * Serializer mixin that resolves appropriate response for tags depending on license.
 **/
 export class DashboardOutput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
+  @Type(() => DashboardCreatedBy)
   createdBy: DashboardCreatedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=creation_mode" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "creation_mode" })
   creationMode: DashboardCreationModeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=effective_privilege_level" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "effective_privilege_level" })
   effectivePrivilegeLevel: number;
 
-  @SpeakeasyMetadata({ data: "json, name=effective_restriction_level" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "effective_restriction_level" })
   effectiveRestrictionLevel: number;
 
-  @SpeakeasyMetadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=is_shared" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "is_shared" })
   isShared: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=pinned" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "pinned" })
   pinned?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=restriction_level" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "restriction_level" })
   restrictionLevel?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "tags" })
   tags?: any[];
 
-  @SpeakeasyMetadata({ data: "json, name=tiles" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "tiles" })
   tiles: string;
 }

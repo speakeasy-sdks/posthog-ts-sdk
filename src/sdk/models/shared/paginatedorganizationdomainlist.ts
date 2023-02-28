@@ -1,17 +1,23 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { OrganizationDomain } from "./organizationdomain";
+import { Expose, Type } from "class-transformer";
 
 
 export class PaginatedOrganizationDomainList extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=count" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "count" })
   count?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=next" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "next" })
   next?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "previous" })
   previous?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=results", elemType: OrganizationDomain })
+  @SpeakeasyMetadata({ elemType: OrganizationDomain })
+  @Expose({ name: "results" })
+  @Type(() => OrganizationDomain)
   results?: OrganizationDomain[];
 }

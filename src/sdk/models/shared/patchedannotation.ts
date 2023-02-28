@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 export enum PatchedAnnotationCreationTypeEnum {
     Usr = "USR",
@@ -11,21 +12,28 @@ export enum PatchedAnnotationScopeEnum {
 }
 
 export class PatchedAnnotationInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=content, form, name=content;, multipart_form, name=content" })
+  @SpeakeasyMetadata({ data: "form, name=content, multipart_form, name=content" })
+  @Expose({ name: "content" })
   content?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=creation_type, form, name=creation_type;, multipart_form, name=creation_type" })
+  @SpeakeasyMetadata({ data: "form, name=creation_type, multipart_form, name=creation_type" })
+  @Expose({ name: "creation_type" })
   creationType?: PatchedAnnotationCreationTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=dashboard_item, form, name=dashboard_item;, multipart_form, name=dashboard_item" })
+  @SpeakeasyMetadata({ data: "form, name=dashboard_item, multipart_form, name=dashboard_item" })
+  @Expose({ name: "dashboard_item" })
   dashboardItem?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=date_marker, form, name=date_marker;, multipart_form, name=date_marker" })
+  @SpeakeasyMetadata({ data: "form, name=date_marker;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=date_marker;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "date_marker" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   dateMarker?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=deleted, form, name=deleted;, multipart_form, name=deleted" })
+  @SpeakeasyMetadata({ data: "form, name=deleted, multipart_form, name=deleted" })
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=scope, form, name=scope;, multipart_form, name=scope" })
+  @SpeakeasyMetadata({ data: "form, name=scope, multipart_form, name=scope" })
+  @Expose({ name: "scope" })
   scope?: PatchedAnnotationScopeEnum;
 }

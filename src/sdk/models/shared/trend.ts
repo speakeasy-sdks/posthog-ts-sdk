@@ -2,6 +2,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { FilterAction } from "./filteraction";
 import { FilterEvent } from "./filterevent";
 import { Property } from "./property";
+import { Expose, Type } from "class-transformer";
 
 export enum TrendBreakdownTypeEnum {
     Event = "event",
@@ -23,36 +24,50 @@ export enum TrendDisplayEnum {
 }
 
 export class Trend extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=actions", elemType: FilterAction })
+  @SpeakeasyMetadata({ elemType: FilterAction })
+  @Expose({ name: "actions" })
+  @Type(() => FilterAction)
   actions?: FilterAction[];
 
-  @SpeakeasyMetadata({ data: "json, name=breakdown" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "breakdown" })
   breakdown?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=breakdown_type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "breakdown_type" })
   breakdownType?: TrendBreakdownTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=compare" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "compare" })
   compare?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=date_from" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "date_from" })
   dateFrom?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=date_to" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "date_to" })
   dateTo?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=display" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "display" })
   display?: TrendDisplayEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=events", elemType: FilterEvent })
+  @SpeakeasyMetadata({ elemType: FilterEvent })
+  @Expose({ name: "events" })
+  @Type(() => FilterEvent)
   events?: FilterEvent[];
 
-  @SpeakeasyMetadata({ data: "json, name=filter_test_accounts" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filter_test_accounts" })
   filterTestAccounts?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=formula" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "formula" })
   formula?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "properties" })
+  @Type(() => Property)
   properties?: Property;
 }

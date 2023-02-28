@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 export enum PatchedOrganizationResourceAccessResourceEnum {
     FeatureFlags = "feature flags",
@@ -11,9 +12,11 @@ export enum PatchedOrganizationResourceAccessResourceEnum {
 }
 
 export class PatchedOrganizationResourceAccessInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=access_level, form, name=access_level;, multipart_form, name=access_level" })
+  @SpeakeasyMetadata({ data: "form, name=access_level, multipart_form, name=access_level" })
+  @Expose({ name: "access_level" })
   accessLevel?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=resource, form, name=resource;, multipart_form, name=resource" })
+  @SpeakeasyMetadata({ data: "form, name=resource, multipart_form, name=resource" })
+  @Expose({ name: "resource" })
   resource?: PatchedOrganizationResourceAccessResourceEnum;
 }

@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 export enum ActionStepUrlMatchingEnum {
     Contains = "contains",
@@ -9,33 +10,43 @@ export enum ActionStepUrlMatchingEnum {
 }
 
 export class ActionStep extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=event" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "event" })
   event?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=href" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "href" })
   href?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "properties" })
   properties?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=selector" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "selector" })
   selector?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=tag_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "tag_name" })
   tagName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=text" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "text" })
   text?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=url" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "url" })
   url?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=url_matching" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "url_matching" })
   urlMatching?: ActionStepUrlMatchingEnum;
 }

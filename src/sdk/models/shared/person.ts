@@ -1,27 +1,36 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 export class Person extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=distinct_ids" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_ids" })
   distinctIds: string[];
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name: string;
 
-  @SpeakeasyMetadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "properties" })
   properties?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
 export class PersonInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=properties, form, name=properties;json=true, multipart_form, name=properties;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=properties;json=true, multipart_form, name=properties;json=true" })
+  @Expose({ name: "properties" })
   properties?: Record<string, any>;
 }

@@ -1,92 +1,128 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform, Type } from "class-transformer";
 
 
 export class ExperimentInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=archived, form, name=archived;, multipart_form, name=archived" })
+  @SpeakeasyMetadata({ data: "form, name=archived, multipart_form, name=archived" })
+  @Expose({ name: "archived" })
   archived?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=description, form, name=description;, multipart_form, name=description" })
+  @SpeakeasyMetadata({ data: "form, name=description, multipart_form, name=description" })
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=end_date, form, name=end_date;, multipart_form, name=end_date" })
+  @SpeakeasyMetadata({ data: "form, name=end_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=end_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "end_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   endDate?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=feature_flag_key, form, name=feature_flag_key;, multipart_form, name=feature_flag_key" })
+  @SpeakeasyMetadata({ data: "form, name=feature_flag_key, multipart_form, name=feature_flag_key" })
+  @Expose({ name: "feature_flag_key" })
   featureFlagKey: string;
 
-  @SpeakeasyMetadata({ data: "json, name=filters, form, name=filters;json=true, multipart_form, name=filters;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=filters;json=true, multipart_form, name=filters;json=true" })
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;, multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "form, name=name, multipart_form, name=name" })
+  @Expose({ name: "name" })
   name: string;
 
-  @SpeakeasyMetadata({ data: "json, name=parameters, form, name=parameters;json=true, multipart_form, name=parameters;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=parameters;json=true, multipart_form, name=parameters;json=true" })
+  @Expose({ name: "parameters" })
   parameters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=secondary_metrics, form, name=secondary_metrics;json=true, multipart_form, name=secondary_metrics;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=secondary_metrics;json=true, multipart_form, name=secondary_metrics;json=true" })
+  @Expose({ name: "secondary_metrics" })
   secondaryMetrics?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=start_date, form, name=start_date;, multipart_form, name=start_date" })
+  @SpeakeasyMetadata({ data: "form, name=start_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=start_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "start_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   startDate?: Date;
 }
 
 export class ExperimentCreatedBy extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=distinct_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "distinct_id" })
   distinctId?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=email" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "email" })
   email: string;
 
-  @SpeakeasyMetadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "first_name" })
   firstName?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "uuid" })
   uuid: string;
 }
 
 export class Experiment extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=archived" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "archived" })
   archived?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
+  @Type(() => ExperimentCreatedBy)
   createdBy: ExperimentCreatedBy;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=end_date" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "end_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   endDate?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=feature_flag" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "feature_flag" })
   featureFlag: number;
 
-  @SpeakeasyMetadata({ data: "json, name=feature_flag_key" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "feature_flag_key" })
   featureFlagKey: string;
 
-  @SpeakeasyMetadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filters" })
   filters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: number;
 
-  @SpeakeasyMetadata({ data: "json, name=name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "name" })
   name: string;
 
-  @SpeakeasyMetadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "parameters" })
   parameters?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=secondary_metrics" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "secondary_metrics" })
   secondaryMetrics?: Record<string, any>;
 
-  @SpeakeasyMetadata({ data: "json, name=start_date" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "start_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   startDate?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "updated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   updatedAt: Date;
 }

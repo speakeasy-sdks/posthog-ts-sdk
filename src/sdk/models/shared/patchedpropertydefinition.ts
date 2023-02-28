@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 export enum PatchedPropertyDefinitionPropertyTypeEnum {
     DateTime = "DateTime",
@@ -14,18 +15,23 @@ export enum PatchedPropertyDefinitionPropertyTypeEnum {
  * Serializer mixin that resolves appropriate response for tags depending on license.
 **/
 export class PatchedPropertyDefinitionInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=is_numerical, form, name=is_numerical;, multipart_form, name=is_numerical" })
+  @SpeakeasyMetadata({ data: "form, name=is_numerical, multipart_form, name=is_numerical" })
+  @Expose({ name: "is_numerical" })
   isNumerical?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;, multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "form, name=name, multipart_form, name=name" })
+  @Expose({ name: "name" })
   name?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=property_type, form, name=property_type;, multipart_form, name=property_type" })
+  @SpeakeasyMetadata({ data: "form, name=property_type, multipart_form, name=property_type" })
+  @Expose({ name: "property_type" })
   propertyType?: PatchedPropertyDefinitionPropertyTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=query_usage_30_day, form, name=query_usage_30_day;, multipart_form, name=query_usage_30_day" })
+  @SpeakeasyMetadata({ data: "form, name=query_usage_30_day, multipart_form, name=query_usage_30_day" })
+  @Expose({ name: "query_usage_30_day" })
   queryUsage30Day?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=tags, form, name=tags;, multipart_form, name=tags" })
+  @SpeakeasyMetadata({ data: "form, name=tags, multipart_form, name=tags" })
+  @Expose({ name: "tags" })
   tags?: any[];
 }

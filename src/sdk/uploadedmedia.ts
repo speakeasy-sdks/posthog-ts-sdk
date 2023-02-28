@@ -39,6 +39,7 @@ export class UploadedMedia {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "post",

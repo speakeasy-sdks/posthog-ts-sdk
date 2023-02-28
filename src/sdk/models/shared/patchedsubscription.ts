@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 export enum PatchedSubscriptionByweekdayEnum {
     Monday = "monday",
@@ -26,45 +27,61 @@ export enum PatchedSubscriptionTargetTypeEnum {
  * Standard Subscription serializer.
 **/
 export class PatchedSubscriptionInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=bysetpos, form, name=bysetpos;, multipart_form, name=bysetpos" })
+  @SpeakeasyMetadata({ data: "form, name=bysetpos, multipart_form, name=bysetpos" })
+  @Expose({ name: "bysetpos" })
   bysetpos?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=byweekday, form, name=byweekday;, multipart_form, name=byweekday" })
+  @SpeakeasyMetadata({ data: "form, name=byweekday, multipart_form, name=byweekday" })
+  @Expose({ name: "byweekday" })
   byweekday?: PatchedSubscriptionByweekdayEnum[];
 
-  @SpeakeasyMetadata({ data: "json, name=count, form, name=count;, multipart_form, name=count" })
+  @SpeakeasyMetadata({ data: "form, name=count, multipart_form, name=count" })
+  @Expose({ name: "count" })
   count?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=dashboard, form, name=dashboard;, multipart_form, name=dashboard" })
+  @SpeakeasyMetadata({ data: "form, name=dashboard, multipart_form, name=dashboard" })
+  @Expose({ name: "dashboard" })
   dashboard?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=deleted, form, name=deleted;, multipart_form, name=deleted" })
+  @SpeakeasyMetadata({ data: "form, name=deleted, multipart_form, name=deleted" })
+  @Expose({ name: "deleted" })
   deleted?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=frequency, form, name=frequency;, multipart_form, name=frequency" })
+  @SpeakeasyMetadata({ data: "form, name=frequency, multipart_form, name=frequency" })
+  @Expose({ name: "frequency" })
   frequency?: PatchedSubscriptionFrequencyEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=insight, form, name=insight;, multipart_form, name=insight" })
+  @SpeakeasyMetadata({ data: "form, name=insight, multipart_form, name=insight" })
+  @Expose({ name: "insight" })
   insight?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=interval, form, name=interval;, multipart_form, name=interval" })
+  @SpeakeasyMetadata({ data: "form, name=interval, multipart_form, name=interval" })
+  @Expose({ name: "interval" })
   interval?: number;
 
-  @SpeakeasyMetadata({ data: "json, name=invite_message, form, name=invite_message;, multipart_form, name=invite_message" })
+  @SpeakeasyMetadata({ data: "form, name=invite_message, multipart_form, name=invite_message" })
+  @Expose({ name: "invite_message" })
   inviteMessage?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=start_date, form, name=start_date;, multipart_form, name=start_date" })
+  @SpeakeasyMetadata({ data: "form, name=start_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=start_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "start_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   startDate?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=target_type, form, name=target_type;, multipart_form, name=target_type" })
+  @SpeakeasyMetadata({ data: "form, name=target_type, multipart_form, name=target_type" })
+  @Expose({ name: "target_type" })
   targetType?: PatchedSubscriptionTargetTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=target_value, form, name=target_value;, multipart_form, name=target_value" })
+  @SpeakeasyMetadata({ data: "form, name=target_value, multipart_form, name=target_value" })
+  @Expose({ name: "target_value" })
   targetValue?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=title, form, name=title;, multipart_form, name=title" })
+  @SpeakeasyMetadata({ data: "form, name=title, multipart_form, name=title" })
+  @Expose({ name: "title" })
   title?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=until_date, form, name=until_date;, multipart_form, name=until_date" })
+  @SpeakeasyMetadata({ data: "form, name=until_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ, multipart_form, name=until_date;dateTimeFormat=YYYY-MM-DDThh:mm:ss.sssZ" })
+  @Expose({ name: "until_date" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   untilDate?: Date;
 }

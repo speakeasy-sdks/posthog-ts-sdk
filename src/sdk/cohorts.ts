@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Cohorts {
   _defaultClient: AxiosInstance;
@@ -41,6 +43,7 @@ export class Cohorts {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -59,7 +62,11 @@ export class Cohorts {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.cohort = httpRes?.data;
+              res.cohort = plainToInstance(
+                shared.Cohort,
+                httpRes?.data as shared.Cohort,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -84,6 +91,7 @@ export class Cohorts {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/cohorts/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -118,19 +126,13 @@ export class Cohorts {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/cohorts/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -141,7 +143,11 @@ export class Cohorts {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedCohortList = httpRes?.data;
+              res.paginatedCohortList = plainToInstance(
+                shared.PaginatedCohortList,
+                httpRes?.data as shared.PaginatedCohortList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -173,6 +179,7 @@ export class Cohorts {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -191,7 +198,11 @@ export class Cohorts {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.cohort = httpRes?.data;
+              res.cohort = plainToInstance(
+                shared.Cohort,
+                httpRes?.data as shared.Cohort,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -213,19 +224,13 @@ export class Cohorts {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/cohorts/{id}/persons/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -236,7 +241,11 @@ export class Cohorts {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.cohort = httpRes?.data;
+              res.cohort = plainToInstance(
+                shared.Cohort,
+                httpRes?.data as shared.Cohort,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `text/csv`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -265,6 +274,7 @@ export class Cohorts {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -279,7 +289,11 @@ export class Cohorts {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.cohort = httpRes?.data;
+              res.cohort = plainToInstance(
+                shared.Cohort,
+                httpRes?.data as shared.Cohort,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -311,6 +325,7 @@ export class Cohorts {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -329,7 +344,11 @@ export class Cohorts {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.cohort = httpRes?.data;
+              res.cohort = plainToInstance(
+                shared.Cohort,
+                httpRes?.data as shared.Cohort,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

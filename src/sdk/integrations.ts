@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Integrations {
   _defaultClient: AxiosInstance;
@@ -32,6 +34,7 @@ export class Integrations {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -46,7 +49,11 @@ export class Integrations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.integration = httpRes?.data;
+              res.integration = plainToInstance(
+                shared.Integration,
+                httpRes?.data as shared.Integration,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -78,6 +85,7 @@ export class Integrations {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     
@@ -97,7 +105,11 @@ export class Integrations {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.integration = httpRes?.data;
+              res.integration = plainToInstance(
+                shared.Integration,
+                httpRes?.data as shared.Integration,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -119,6 +131,7 @@ export class Integrations {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/integrations/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -153,19 +166,13 @@ export class Integrations {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/integrations/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -176,7 +183,11 @@ export class Integrations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedIntegrationList = httpRes?.data;
+              res.paginatedIntegrationList = plainToInstance(
+                shared.PaginatedIntegrationList,
+                httpRes?.data as shared.PaginatedIntegrationList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -199,6 +210,7 @@ export class Integrations {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -213,7 +225,11 @@ export class Integrations {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.integration = httpRes?.data;
+              res.integration = plainToInstance(
+                shared.Integration,
+                httpRes?.data as shared.Integration,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

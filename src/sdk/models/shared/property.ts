@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { PropertyItem } from "./propertyitem";
+import { Expose, Type } from "class-transformer";
 
 export enum PropertyTypeEnum {
     And = "AND",
@@ -7,9 +8,12 @@ export enum PropertyTypeEnum {
 }
 
 export class Property extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=type" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "type" })
   type?: PropertyTypeEnum;
 
-  @SpeakeasyMetadata({ data: "json, name=values", elemType: PropertyItem })
+  @SpeakeasyMetadata({ elemType: PropertyItem })
+  @Expose({ name: "values" })
+  @Type(() => PropertyItem)
   values: PropertyItem[];
 }

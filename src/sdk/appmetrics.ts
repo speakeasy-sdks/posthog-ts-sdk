@@ -32,6 +32,7 @@ export class AppMetrics {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -65,6 +66,7 @@ export class AppMetrics {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/app_metrics/{parent_lookup_plugin_config_id}/historical_exports/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -100,6 +102,7 @@ export class AppMetrics {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -133,6 +136,7 @@ export class AppMetrics {
     const url: string = utils.generateURL(baseURL, "/api/projects/{project_id}/app_metrics/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,

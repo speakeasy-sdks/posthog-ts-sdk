@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Plugins {
   _defaultClient: AxiosInstance;
@@ -32,6 +34,7 @@ export class Plugins {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -46,7 +49,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -69,6 +76,7 @@ export class Plugins {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -83,7 +91,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -115,6 +127,7 @@ export class Plugins {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -133,7 +146,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 201:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -155,6 +172,7 @@ export class Plugins {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/plugins/{id}/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
+    
     
     const r = client.request({
       url: url,
@@ -189,19 +207,13 @@ export class Plugins {
     const url: string = utils.generateURL(baseURL, "/api/organizations/{parent_lookup_organization_id}/plugins/", req.pathParams);
     
     const client: AxiosInstance = this._defaultClient!;
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
     
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -212,7 +224,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.paginatedPluginList = httpRes?.data;
+              res.paginatedPluginList = plainToInstance(
+                shared.PaginatedPluginList,
+                httpRes?.data as shared.PaginatedPluginList,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -244,6 +260,7 @@ export class Plugins {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -262,7 +279,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -285,6 +306,7 @@ export class Plugins {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -299,7 +321,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -322,6 +348,7 @@ export class Plugins {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -336,7 +363,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -359,6 +390,7 @@ export class Plugins {
     
     const client: AxiosInstance = this._defaultClient!;
     
+    
     const r = client.request({
       url: url,
       method: "get",
@@ -373,7 +405,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -405,6 +441,7 @@ export class Plugins {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -423,7 +460,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -455,6 +496,7 @@ export class Plugins {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -473,7 +515,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -505,6 +551,7 @@ export class Plugins {
     }
     
     const client: AxiosInstance = this._defaultClient!;
+    
     const headers = {...reqBodyHeaders, ...config?.headers};
     
     const r = client.request({
@@ -523,7 +570,11 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
