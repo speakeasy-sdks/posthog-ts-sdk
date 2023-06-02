@@ -6,4 +6,5 @@ typescript:
     version: 0.3.1
     packagename: '@posthog/sdk'
     author: posthog
+    maxPathParams: 4
 sdkclassname: posthog
